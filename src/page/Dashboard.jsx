@@ -115,7 +115,7 @@ function Dashboard() {
           </form>
         </div>
       )}
-      <h1 className="text-center mt-10 mb-10 text-3xl font-bold">
+      <h1 className="text-center mt-10 mb-5 text-3xl font-bold">
         All Datas
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-[50px]">
