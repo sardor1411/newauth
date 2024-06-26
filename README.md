@@ -1,9 +1,20 @@
-# React + Vite
+## SardorDev
+Bu proyekt Ermuhammedov Sardor tomonidan yaratilgan. Ushbu proyekt dasturchilik bilan bog'liq mavzular va kodlar bo'yicha ma'lumotlar va misollar jamlangan.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Qanday Ishlatish
+Proyektni o'zingizning kompyuteringizga yuklab oling yoki GitHub repositoriyasidan klonlashtiring. Keyin proyektni loyihalash jarayonida yoki dastur ishga tushirishda kerakli o'zgartirishlarni kiritishingiz mumkin.
 
-Currently, two official plugins are available:
+## Tekshirish
+Proyektni tekshirish uchun dasturda kerakli o'zgartirishlarni kiritishdan avval, npm install komandasini ishga tushiring. Keyin esa npm run dev komandasini ishga tushiring va brauzeringizda http://localhost:5173/ manziliga o'ting.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# newauth
+## Tavsif
+Bu proyekt dasturdagi ro'yhatdan o'tish, kirish bilan bog'liq mavzularni o'rganish uchun yaratilgan. Uning ichida JavaScript, HTML, CSS, TAILWIND, VITE va boshqa dasturlash tillari bo'yicha kodlar va misollar mavjud.
+
+## Muallif
+Bu proyekt Ermuhammedov Sardor tomonidan yaratilgan. Ushbu proyekt bilan bog'liq savollar uchun email([sardordevcompany@gmail.com]) orqali murojaat qilishingiz mumkin.
+
+## Litsenziya
+Ushbu proyekt MIT litsenziyasi asosida rivojlantirilgan.
+
+## Yordam
+Agar dastur ishlashida yoki kodni o'zgartirishda yordam kerak bo'lsa, iltimos, email([sardordevcompany@gmail.com]) orqali murojaat qiling.
