@@ -52,28 +52,28 @@ function App() {
         <nav>
           <button className='text-[35px] absolute top-0 left-[80%]' onClick={toggleNavbar}><IoIosCloseCircleOutline /></button>
           <ul className=' w-[80%] m-auto gap-2 h-[50px] grid items-center justify-center'>
-            <li className='text-[700] border w-[150px] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
+            <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
               <NavLink to="/home">Home</NavLink>
             </li>
-            <li className='text-[700] border w-[150px] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
+            <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
               <NavLink to="/blog">Blog</NavLink>
             </li>
             {!currentUser && (
               <>
-                <li className='text-[700] border w-[150px] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
+                <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
                   <NavLink to="/signup">Sign Up</NavLink>
                 </li>
-                <li className='text-[700] border w-[150px] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
+                <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
                   <NavLink to="/signin">Sign In</NavLink>
                 </li>
               </>
             )}
             {currentUser && (
-              <li className='text-[700] border w-[150px] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue ' onClick={handleSignOut}>
+              <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue ' onClick={handleSignOut}>
                 <Link>Sign Out</Link>
               </li>
             )}
-            <li className='text-[700] border w-[150px] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
+            <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
               <NavLink to="/dashboard">Dashboard</NavLink>
             </li>
           </ul>

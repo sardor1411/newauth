@@ -14,15 +14,9 @@ function Dashboard() {
   const [des, setDes] = useState('');
   const [img, setImg] = useState('');
   const [id, setId] = useState('');
-  const [showCreateForm, setShowCreateForm] = useState(true);
-  const [showUpdateForm, setShowUpdateForm] = useState(false);
-  const [modal, setModal] = useState(false);
-
-  const toggleModal = () => {
-    setModal(!modal)
-  }
-
-
+  const [showForm, setShowForm] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
+  
   let data = collection(db, 'blogs');
 
   useEffect(() => {
@@ -37,8 +31,6 @@ function Dashboard() {
     );
   }, []);
 
-  const database = collection(db, 'blogs');
-
   const handleCreate = async (e) => {
     e.preventDefault();
     if (title === "" || des === "" || img === "") {
@@ -47,7 +39,7 @@ function Dashboard() {
         description: "Malumot to'liq kiritilmagan"
       });
     } else {
-      await addDoc(database, {
+      await addDoc(data, {
         title: title,
         descript: des,
         img: img,
@@ -61,6 +53,7 @@ function Dashboard() {
       setDes("");
       setTitle("");
       setImg("");
+      setShowForm(false);
     }
   }
 
@@ -75,16 +68,16 @@ function Dashboard() {
     setTitle(title);
     setDes(descript);
     setImg(img);
-    setShowCreateForm(false);
-    setShowUpdateForm(true);
+    setIsUpdate(true);
+    setShowForm(true);
   }
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     const updateData = doc(db, 'blogs', id);
     await updateDoc(updateData, { id, title, descript: des, img });
-    setShowCreateForm(true);
-    setShowUpdateForm(false);
+    setIsUpdate(false);
+    setShowForm(false);
     setDes("");
     setTitle("");
     setImg("");
@@ -92,40 +85,12 @@ function Dashboard() {
 
   return (
     <>
-      {showUpdateForm && (
-        <div className="mt-10 p-4 border border-gray-300 rounded-md">
-          <h2 className="text-2xl mb-4">Update Post</h2>
-          <form onSubmit={handleUpdate}>
-            <input
-              type="text"
-              placeholder="Title"
-              className="block w-full p-2 mb-4 border border-gray-300 rounded-md"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <textarea
-              placeholder="Description"
-              className="block w-full p-2 mb-4 border border-gray-300 rounded-md"
-              value={des}
-              onChange={(e) => setDes(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Image URL"
-              className="block w-full p-2 mb-4 border border-gray-300 rounded-md"
-              value={img}
-              onChange={(e) => setImg(e.target.value)}
-            />
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-md">Update</button>
-          </form>
-        </div>
-      )}
-      <button className="flex m-auto border w-[150px] h-[40px] items-center justify-center mt-[15px]" onClick={toggleModal}>Create Data</button>
-      {showCreateForm && (
-        <div className={`overflow-hidden mt-10 p-4 border w-full h-full  border-gray-300 rounded-md m-auto fixed top-[-45px] left-0 right-0 backdrop-blur-[10px] ${modal ? 'block' : 'hidden'}`}>
-          <button onClick={toggleModal} className="text-[30px] absolute top-[20px] left-[95%]"><IoIosCloseCircleOutline /></button>
-          <h2 className="text-2xl mb-4 text-center font-[700] mt-[10%]">Create New Post</h2>
-          <form onSubmit={handleCreate}>
+      <button className="flex m-auto border w-[140px] h-[40px] items-center justify-center mt-[15px]" onClick={() => setShowForm(true)}>Create Data</button>
+      {showForm && (
+        <div className="overflow-hidden mt-10 p-4 border w-full h-full  border-gray-300 rounded-md m-auto fixed top-[-45px] left-0 right-0 backdrop-blur-[10px]">
+          <button onClick={() => setShowForm(false)} className="text-[30px] absolute top-[20px] left-[95%]"><IoIosCloseCircleOutline /></button>
+          <h2 className="text-2xl mb-4 text-center font-[700] mt-[10%]">{isUpdate ? 'Update Post' : 'Create New Post'}</h2>
+          <form onSubmit={isUpdate ? handleUpdate : handleCreate}>
             <input
               type="text"
               placeholder="Title"
@@ -146,7 +111,7 @@ function Dashboard() {
               value={img}
               onChange={(e) => setImg(e.target.value)}
             />
-            <button className="bg-green-500  text-white px-4 py-2 rounded-md flex m-auto">Create</button>
+            <button className="bg-green-500 text-white px-4 py-2 rounded-md flex m-auto">{isUpdate ? 'Update' : 'Create'}</button>
           </form>
         </div>
       )}
@@ -170,7 +135,6 @@ function Dashboard() {
           )
         })}
       </div>
-
     </>
   )
 }
