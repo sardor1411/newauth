@@ -88,7 +88,7 @@ function Dashboard() {
 
   return (
     <>
-      <button className="flex m-auto border w-[140px] h-[40px] items-center justify-center mt-[15px]" onClick={() => setShowForm(true)}>Create Data</button>
+      <button className="flex m-auto border w-[140px] h-[40px] items-center justify-center mt-[15px]" onClick={() => setShowForm(true)}>Ma'lumot qo'shish</button>
       {showForm && (
         <div className="overflow-hidden mt-10 p-4 border w-full h-full border-gray-300 rounded-md m-auto fixed top-[-45px] left-0 right-0 backdrop-blur-[100px]">
           <button onClick={() => setShowForm(false)} className="text-[30px] absolute top-[20px] left-[95%]"><IoIosCloseCircleOutline /></button>
