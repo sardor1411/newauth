@@ -158,7 +158,7 @@ function Dashboard() {
       <h1 className="text-center mt-10 mb-10 text-3xl font-bold">
         All Datas
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-[50px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mb-[50px]">
         {box.map((mall) => (
           <div className="border border-black max-w-full max-h-full text-center m-auto rounded-md h-auto mt-6 shadow-lg" key={mall.id}>
             <div className="box p-4">
