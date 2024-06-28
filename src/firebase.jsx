@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import {getAuth} from 'firebase/auth'
+import { getAuth } from 'firebase/auth';
+import { getStorage } from 'firebase/storage'; // Firebase Storage'ni import qilish
 
 const firebaseConfig = {
   apiKey: "AIzaSyBSh7AoUBcBsFhUJSGQnExzSiXK0HC0bRk",
@@ -12,7 +13,7 @@ const firebaseConfig = {
   measurementId: "G-0VFQE6JJDV"
 };
 
-
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+export const storage = getStorage(app); // Firebase Storage'ni eksport qilish
