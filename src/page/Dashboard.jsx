@@ -46,14 +46,14 @@ function Dashboard() {
       const imgRef = ref(storage, `images/${img.name}-${uuid()}`);
       const uploadTask = uploadBytesResumable(imgRef, img);
 
-      uploadTask.on('state_changed', 
-        (snapshot) => {},
+      uploadTask.on('state_changed',
+        (snapshot) => { },
         (error) => {
           notification.error({
             message: "Rasm yuklanmadi",
             description: error.message
           });
-        }, 
+        },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             await addDoc(data, {
@@ -194,10 +194,15 @@ function Dashboard() {
         {box.map((mall) => (
           <div className="border border-black  w-[70%] max-h-full text-center m-auto h-auto rounded-md  mt-6 shadow-lg" key={mall.id}>
             <div className="box p-4 ">
-              <img className="w-[55%] m-auto h-[250px] rounded-t-md" src={mall.img} alt={mall.title} />
+              <img className="w-[52%] m-auto h-[250px] rounded-t-md" src={mall.img} alt={mall.title} />
               <p className="mt-6 mb-4 text-[20px] text-blue-500">Zakaz vaqti: {mall.firstData}</p>
               <p className="mt-6 text-[21px] text-green-600 font-semibold">To'yxona haqida: {mall.title}</p>
-              <p className="mt-6 mb-4 text-[22px] text-red-500">To'y xaqida ma'lumot: {mall.descript}</p>
+              <p className="mt-6 mb-4 text-[22px] text-red-500 ">To'y xaqida ma'lumot:</p>
+              <textarea
+              value={mall.descript}
+              placeholder="Ma'lumotlar"
+              className="block w-[90%] p-2 mb-4 border h-[40px] border-gray-300 rounded-md m-auto"
+            />
               <p className="mt-6 mb-4 text-[23px] text-blue-500"> Montaj bajarilganmi : <span className="text-green-600 font-[600]">{mall.montaj}</span></p>
               <div className="flex justify-evenly">
                 <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={() => handleEdit(mall.id, mall.title, mall.descript, mall.img, mall.montaj, mall.firstData)}>Edit</button>
