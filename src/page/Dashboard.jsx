@@ -186,7 +186,7 @@ function Dashboard() {
                 />
               </label>
             </div>
-            <button className="bg-green-500 text-white px-4 py-2 rounded-md flex m-auto">{isUpdate ? 'Update' : 'Create'}</button>
+            <button className="bg-green-500 text-white px-4 py-2 rounded-md flex m-auto">{isUpdate ? 'Update' : "Malumot qo'shish"}</button>
           </form>
         </div>
       )}
