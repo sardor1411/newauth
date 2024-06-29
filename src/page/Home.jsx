@@ -36,17 +36,23 @@ function Home() {
                         <div className="border border-black max-w-full max-h-full text-center m-auto rounded-md h-auto mt-6 shadow-lg" key={mall.id}>
                             <div className="box p-4">
                                 <img className="w-full h-64 object-cover rounded-t-md" src={mall.img} alt="" />
+                                <p className="mt-6 mb-4 text-[20px] text-blue-500">Zakaz vaqti: {mall.firstData}</p>
                                 <h3 className="mt-6 text-2xl text-green-600 font-semibold">Ism: {mall.title}</h3>
-                                <h2 className="mt-6 mb-4 text-xl text-red-500">Ma'lumot: {mall.descript}</h2>
-                                <div className="flex justify-evenly">
-                                </div>
+                                <p className="mt-6 mb-4 text-[22px] text-red-500 ">To'y xaqida ma'lumot:</p>
+                                <textarea
+                                    value={mall.descript}
+                                    placeholder="Ma'lumotlar"
+                                    className="block w-[90%] p-2 mb-4 border h-[40px] border-gray-300 rounded-md m-auto"
+                                />
+                                <p className="mt-6 mb-4 text-[23px] text-blue-500"> Montaj bajarilganmi : <span className="text-green-600 font-[600]">{mall.montaj}</span></p>
+
                             </div>
                         </div>
                     )
                 })}
             </div>
-            
-           
+
+
         </>
     )
 }

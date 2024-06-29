@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Routes, Route, NavLink, Navigate, Link } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
 import { signOut } from 'firebase/auth';
-import { auth } from './firebase'; 
+import { auth } from './firebase';
 import Dashboard from './page/Dashboard';
 import Blog from './page/Blog';
 import SignUp from './page/SignUp';
@@ -27,7 +27,7 @@ function App() {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        dispatch({ type: "LOGIN", payload: null });
+        dispatch({ type: "LOGOUT", payload: null });
       })
       .catch((error) => {
         console.error('hechnma', error);
@@ -60,9 +60,6 @@ function App() {
             </li>
             {!currentUser && (
               <>
-                <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
-                  <NavLink to="/signup">Sign Up</NavLink>
-                </li>
                 <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
                   <NavLink to="/signin">Sign In</NavLink>
                 </li>
