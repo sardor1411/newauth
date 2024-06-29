@@ -1,33 +1,28 @@
-import { useState, useEffect } from "react";
+import React, { useState } from 'react';
 import { notification } from 'antd';
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import { v4 as uuid } from "uuid";
-import { collection, addDoc, deleteDoc, onSnapshot, updateDoc, doc } from "firebase/firestore";
+import { IoIosCloseCircleOutline } from 'react-icons/io';
+import { v4 as uuid } from 'uuid';
+import { collection, addDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { db } from "../firebase";
+import { db } from '../firebase';
 
-function CreateData() {
-
-    const [box, setBox] = useState([]);
+const CreateData = () => {
     const [title, setTitle] = useState('');
     const [des, setDes] = useState('');
     const [img, setImg] = useState(null);
-    const [imgUrl, setImgUrl] = useState('');
     const [montaj, setMontaj] = useState('');
     const [firstData, setFirstData] = useState('');
     const [showForm, setShowForm] = useState(false);
-    const [showMontaj, setShowMontaj] = useState(false);
-    const [isUpdate, setIsUpdate] = useState(false);
 
     const data = collection(db, 'blogs');
     const storage = getStorage();
 
     const handleCreate = async (e) => {
         e.preventDefault();
-        if (title === "" || des === "" || img === null || montaj === "" || firstData === "") {
+        if (title === '' || des === '' || img === null || montaj === '' || firstData === '') {
             return notification.error({
-                message: "Input bo'sh",
-                description: "Malumot to'liq kiritilmagan"
+                message: 'Input bo\'sh',
+                description: 'Malumot to\'liq kiritilmagan',
             });
         }
 
@@ -35,12 +30,13 @@ function CreateData() {
             const imgRef = ref(storage, `images/${img.name}-${uuid()}`);
             const uploadTask = uploadBytesResumable(imgRef, img);
 
-            uploadTask.on('state_changed',
+            uploadTask.on(
+                'state_changed',
                 (snapshot) => { },
                 (error) => {
                     notification.error({
-                        message: "Rasm yuklanmadi",
-                        description: error.message
+                        message: 'Rasm yuklanmadi',
+                        description: error.message,
                     });
                 },
                 () => {
@@ -51,11 +47,11 @@ function CreateData() {
                             img: downloadURL,
                             id: uuid(),
                             montaj,
-                            firstData
+                            firstData,
                         });
                         notification.success({
-                            message: "Ma'lumot kiritildi",
-                            description: "Sizning barcha ma'lumotlaringiz kiritildi"
+                            message: 'Ma\'lumot kiritildi',
+                            description: 'Sizning barcha ma\'lumotlaringiz kiritildi',
                         });
                         setShowForm(false);
                         resetForm();
@@ -63,38 +59,41 @@ function CreateData() {
                 }
             );
         } catch (error) {
-            console.error("Error uploading image:", error);
+            console.error('Error uploading image:', error);
             notification.error({
-                message: "Rasm yuklanmadi",
-                description: error.message
+                message: 'Rasm yuklanmadi',
+                description: error.message,
             });
         }
     };
+
     const handleFileChange = (e) => {
         if (e.target.files[0]) {
             setImg(e.target.files[0]);
         }
     };
+
     const resetForm = () => {
-        setTitle("");
-        setDes("");
+        setTitle('');
+        setDes('');
         setImg(null);
-        setImgUrl('');
-        setMontaj("");
-        setFirstData("");
+        setMontaj('');
+        setFirstData('');
         setShowForm(false);
     };
+
     return (
-
-
-
         <>
-            <button className="flex m-auto border w-[140px] h-[40px] items-center justify-center mt-[15px]" onClick={() => setShowForm(true)}>Ma'lumot qo'shish</button>
+            <button className="flex m-auto border w-[140px] h-[40px] items-center justify-center mt-[15px]" onClick={() => setShowForm(true)}>
+                Ma'lumot qo'shish
+            </button>
             {showForm && (
                 <div className="overflow-hidden mt-10 p-4 border w-full h-full border-gray-300 rounded-md fixed top-0 left-0 right-0 backdrop-blur-[100px]">
-                    <button onClick={() => setShowForm(false)} className="text-[30px] absolute top-[20px] left-[95%]"><IoIosCloseCircleOutline /></button>
-                    <h2 className="text-2xl mb-4 font-[700]">{isUpdate ? 'Update Post' : 'Create New Post'}</h2>
-                    <form onSubmit={isUpdate ? handleUpdate : handleCreate}>
+                    <button onClick={() => setShowForm(false)} className="text-[30px] absolute top-[20px] left-[95%]">
+                        <IoIosCloseCircleOutline />
+                    </button>
+                    <h2 className="text-2xl mb-4 font-[700]">Create New Post</h2>
+                    <form onSubmit={handleCreate}>
                         <div>
                             <label htmlFor="date">
                                 <h1 className="mb-[10px]">Vaqtni kiriting</h1>
@@ -133,7 +132,7 @@ function CreateData() {
                                         id="ha"
                                         name="montaj"
                                         value="Bajarildi"
-                                        checked={montaj === "Bajarildi"}
+                                        checked={montaj === 'Bajarildi'}
                                         onChange={(e) => setMontaj(e.target.value)}
                                         className="ml-2"
                                     />
@@ -145,19 +144,21 @@ function CreateData() {
                                         id="yoq"
                                         name="montaj"
                                         value="Bajarilmoqda"
-                                        checked={montaj === "Bajarilmoqda"}
+                                        checked={montaj === 'Bajarilmoqda'}
                                         onChange={(e) => setMontaj(e.target.value)}
                                         className="ml-2"
                                     />
                                 </label>
                             </div>
-                            <button className="bg-green-500 text-white px-4 py-2 rounded-md">{isUpdate ? 'Update' : "Malumot qo'shish"}</button>
+                            <button className="bg-green-500 text-white px-4 py-2 rounded-md" type="submit">
+                                Malumot qo'shish
+                            </button>
                         </div>
                     </form>
                 </div>
             )}
         </>
-    )
-}
+    );
+};
 
 export default CreateData;
