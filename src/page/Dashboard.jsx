@@ -5,7 +5,6 @@ import { v4 as uuid } from "uuid";
 import { collection, addDoc, deleteDoc, onSnapshot, updateDoc, doc } from "firebase/firestore";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { db } from "../firebase";
-import CreateData from "./CreateData";
 
 function Dashboard() {
   const [box, setBox] = useState([]);
@@ -16,12 +15,15 @@ function Dashboard() {
   const [id, setId] = useState('');
   const [montaj, setMontaj] = useState('');
   const [firstData, setFirstData] = useState('');
-  const [bekzod, setBekzod] = useState('Bekzod');
-  const [siroj, setSiroj] = useState('Siroj');
+  const [bekzod, setBekzod] = useState('');
+  const [siroj, setSiroj] = useState('');
 
   const [showForm, setShowForm] = useState(false);
   const [showMontaj, setShowMontaj] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
+
+  const [bekzodChecked, setBekzodChecked] = useState(false);
+  const [sirojChecked, setSirojChecked] = useState(false);
 
   const data = collection(db, 'blogs');
   const storage = getStorage();
@@ -58,6 +60,9 @@ function Dashboard() {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            const bekzodName = bekzodChecked ? 'Bekzod' : '';
+            const sirojName = sirojChecked ? 'Siroj' : '';
+
             await addDoc(data, {
               title,
               descript: des,
@@ -65,8 +70,8 @@ function Dashboard() {
               id: uuid(),
               montaj,
               firstData,
-              bekzod,
-              siroj
+              bekzod: bekzodName,
+              siroj: sirojName
             });
             notification.success({
               message: "Ma'lumot kiritildi",
@@ -101,6 +106,8 @@ function Dashboard() {
     setFirstData(firstData);
     setBekzod(bekzod);
     setSiroj(siroj);
+    setBekzodChecked(bekzod === 'Bekzod');
+    setSirojChecked(siroj === 'Siroj');
     setIsUpdate(true);
     setShowForm(true);
   };
@@ -108,13 +115,23 @@ function Dashboard() {
   const handleUpdate = async (e) => {
     e.preventDefault();
     const updateData = doc(db, 'blogs', id);
-    await updateDoc(updateData, { id, title, descript: des, img: imgUrl, montaj, firstData, bekzod, siroj });
+    const bekzodName = bekzodChecked ? 'Bekzod' : '';
+    const sirojName = sirojChecked ? 'Siroj' : '';
+
+    await updateDoc(updateData, {
+      title,
+      descript: des,
+      img: imgUrl,
+      montaj,
+      firstData,
+      bekzod: bekzodName,
+      siroj: sirojName
+    });
     setShowForm(false);
     setIsUpdate(false);
     resetForm();
   };
 
-  
   const handleMontaj = async (e) => {
     e.preventDefault();
     try {
@@ -146,6 +163,8 @@ function Dashboard() {
     setBekzod("");
     setSiroj("");
     setShowForm(false);
+    setBekzodChecked(false);
+    setSirojChecked(false);
   };
 
   const handleFileChange = (e) => {
@@ -154,9 +173,147 @@ function Dashboard() {
     }
   };
 
+  const handleBekzodChange = (e) => {
+    setBekzodChecked(e.target.checked);
+  };
+
+  const handleSirojChange = (e) => {
+    setSirojChecked(e.target.checked);
+  };
+
   return (
     <>
-    <CreateData/>
+      <div>
+        <button className="flex m-auto border w-[140px] h-[40px] items-center justify-center mt-[15px]" onClick={() => setShowForm(true)}>
+          Ma'lumot qo'shish
+        </button>
+        {showForm && (
+          <div className="overflow-hidden mt-10 p-4 border w-full h-full border-gray-300 rounded-md fixed top-0 left-0 right-0 backdrop-blur-[100px]">
+            <button onClick={() => setShowForm(false)} className="text-[30px] absolute top-[20px] left-[95%]">
+              <IoIosCloseCircleOutline />
+            </button>
+            <h2 className="text-2xl mb-4 font-[700]">Create New Post</h2>
+            <form onSubmit={isUpdate ? handleUpdate : handleCreate}>
+              <div>
+                <label htmlFor="date">
+                  <h1 className="mb-[10px]">Vaqtni kiriting</h1>
+                  <input
+                    id="date"
+                    type="date"
+                    className="block w-[25%] p-2 mb-4 border border-gray-300 rounded-md"
+                    value={firstData}
+                    onChange={(e) => setFirstData(e.target.value)}
+                  />
+                </label>
+                <input
+                  type="text"
+                  placeholder="To'y Xona"
+                  className="block w-[25%] p-2 mb-4 border border-gray-300 rounded-md"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+                <textarea
+                  placeholder="To'y xaqida ma'lumotlar"
+                  className="block w-[25%] p-2 mb-4 border border-gray-300 rounded-md"
+                  value={des}
+                  onChange={(e) => setDes(e.target.value)}
+                />
+                <input
+                  type="file"
+                  className="block w-[25%] p-2 mb-4 border border-gray-300 rounded-md"
+                  onChange={handleFileChange}
+                />
+                <h1 className="text-black text-[20px] mb-[10px]">Montaj qilinganmi?</h1>
+                <div className="flex mb-[15px]">
+                  <label htmlFor="ha" className="flex text-black">
+                    Bajarildi
+                    <input
+                      type="radio"
+                      id="ha"
+                      name="montaj"
+                      value="Bajarildi"
+                      checked={montaj === 'Bajarildi'}
+                      onChange={(e) => setMontaj(e.target.value)}
+                      className="ml-2"
+                    />
+                  </label>
+                  <label htmlFor="yo'q" className="ml-5 flex text-black">
+                    Bajartilmadi
+                    <input
+                      type="radio"
+                      id="yo'q"
+                      name="montaj"
+                      value="Bajartilmadi"
+                      checked={montaj === 'Bajartilmadi'}
+                      onChange={(e) => setMontaj(e.target.value)}
+                      className="ml-2"
+                    />
+                  </label>
+                </div>
+                <div className="flex mb-[15px]">
+                  <label htmlFor="bekzod" className="flex text-black">
+                    Bekzod
+                    <input
+                      type="checkbox"
+                      id="bekzod"
+                      name="bekzod"
+                      checked={bekzodChecked}
+                      onChange={handleBekzodChange}
+                      className="ml-2"
+                    />
+                  </label>
+                  <label htmlFor="siroj" className="ml-5 flex text-black">
+                    Siroj
+                    <input
+                      type="checkbox"
+                      id="siroj"
+                      name="siroj"
+                      checked={sirojChecked}
+                      onChange={handleSirojChange}
+                      className="ml-2"
+                    />
+                  </label>
+                </div>
+              </div>
+              <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                {isUpdate ? 'Update' : "Yaratish"}
+              </button>
+            </form>
+          </div>
+        )}
+        <button onClick={() => setShowMontaj(true)} className="flex m-auto border w-[140px] h-[40px] items-center justify-center mt-[15px]">
+          Montaj qo'shish
+        </button>
+        {showMontaj && (
+          <div className="overflow-hidden mt-10 p-4 border w-full h-full border-gray-300 rounded-md fixed top-0 left-0 right-0 backdrop-blur-[100px]">
+            <button onClick={() => setShowMontaj(false)} className="text-[30px] absolute top-[20px] left-[95%]">
+              <IoIosCloseCircleOutline />
+            </button>
+            <h2 className="text-2xl mb-4 font-[700]">Montaj uchun ma'lumotlar</h2>
+            <form onSubmit={handleMontaj}>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Bekzod"
+                  className="block w-[25%] p-2 mb-4 border border-gray-300 rounded-md"
+                  value={bekzod}
+                  onChange={(e) => setBekzod(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Siroj"
+                  className="block w-[25%] p-2 mb-4 border border-gray-300 rounded-md"
+                  value={siroj}
+                  onChange={(e) => setSiroj(e.target.value)}
+                />
+              </div>
+              <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Yaratish
+              </button>
+            </form>
+          </div>
+        )}
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mb-[50px]">
         {box.map((mall) => (
           <div className="border border-black w-[70%] max-h-full text-center m-auto h-auto rounded-md mt-6 shadow-lg" key={mall.id}>
@@ -178,23 +335,13 @@ function Dashboard() {
               <div className="flex justify-evenly">
                 <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={() => handleEdit(mall.id, mall.title, mall.descript, mall.img, mall.montaj, mall.firstData, mall.bekzod, mall.siroj)}>Edit</button>
                 <button className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={() => handleDelete(mall.id)}>Delete</button>
-                <button className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={() => setShowMontaj(true)}>Montaj</button>
+                {/* <button className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={() => setShowMontaj(true)}>Montaj</button> */}
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      {showMontaj && (
-        <div className="fixed top-0 left-0 right-0 bottom-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-md shadow-lg">
-            <button value={bekzod} className="bg-black text-white px-4 py-2 rounded-md mt-4" onClick={(e) => setBekzod(e.target.value)}>Bekzod</button>
-            <button value={siroj} className="bg-black text-white px-4 py-2 rounded-md mt-4 ml-[50px]" onClick={(e) => setSiroj(e.target.value)}>Siroj</button><br />
-            <button onClick={() => setShowMontaj(false)} className="bg-red-500 text-white px-4 py-2 rounded-md mt-4">Close</button>
-            <button onClick={handleMontaj} className="bg-red-500 text-white px-4 py-2 rounded-md mt-4">Submit</button>
-          </div>
-        </div>
-      )}
     </>
   );
 }
