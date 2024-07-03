@@ -281,9 +281,6 @@ function Dashboard() {
             </form>
           </div>
         )}
-        <button onClick={() => setShowMontaj(true)} className="flex m-auto border w-[140px] h-[40px] items-center justify-center mt-[15px]">
-          Montaj qo'shish
-        </button>
         {showMontaj && (
           <div className="overflow-hidden mt-10 p-4 border w-full h-full border-gray-300 rounded-md fixed top-0 left-0 right-0 backdrop-blur-[100px]">
             <button onClick={() => setShowMontaj(false)} className="text-[30px] absolute top-[20px] left-[95%]">
