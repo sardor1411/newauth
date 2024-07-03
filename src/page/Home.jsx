@@ -39,13 +39,17 @@ function Home() {
                                 <p className="mt-6 mb-4 text-[20px] text-blue-500">Zakaz vaqti: {mall.firstData}</p>
                                 <h3 className="mt-6 text-2xl text-green-600 font-semibold">Ism: {mall.title}</h3>
                                 <p className="mt-6 mb-4 text-[22px] text-red-500 ">To'y xaqida ma'lumot:</p>
+                                <div className="border rounded-[10px] shadow-inner">
+                                    <h2 className="text-[18px]">Montajchilar ro'yxati:</h2>
+                                    <p className="text-[18px]">{mall.bekzod}</p>
+                                    <p className="text-[18px]">{mall.siroj}</p>
+                                </div><br />    
                                 <textarea
                                     value={mall.descript}
                                     placeholder="Ma'lumotlar"
                                     className="block w-[90%] p-2 mb-4 border h-[40px] border-gray-300 rounded-md m-auto"
                                 />
                                 <p className="mt-6 mb-4 text-[23px] text-blue-500"> Montaj bajarilganmi : <span className="text-green-600 font-[600]">{mall.montaj}</span></p>
-
                             </div>
                         </div>
                     )

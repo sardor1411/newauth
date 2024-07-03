@@ -39,7 +39,7 @@ function Dashboard() {
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    if (title === "" || des === "" || img === null || montaj === "" || firstData === "") {
+    if (title === "" || des === "" || img === null || montaj === "" || firstData === "" || bekzodChecked === "" || sirojChecked === "") {
       return notification.error({
         message: "Input bo'sh",
         description: "Malumot to'liq kiritilmagan"
@@ -184,8 +184,8 @@ function Dashboard() {
   return (
     <>
       <div>
-        <button className="flex m-auto border w-[140px] h-[40px] items-center justify-center mt-[15px]" onClick={() => setShowForm(true)}>
-          Ma'lumot qo'shish
+        <button className="flex m-auto border w-[100px] h-[40px] items-center justify-center mt-[15px]" onClick={() => setShowForm(true)}>
+          Add Data
         </button>
         {showForm && (
           <div className="overflow-hidden mt-10 p-4 border w-full h-full border-gray-300 rounded-md fixed top-0 left-0 right-0 backdrop-blur-[100px]">
@@ -311,7 +311,7 @@ function Dashboard() {
           </div>
         )}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-[50px]">
         {box.map((mall) => (
           <div className="border border-black max-w-full max-h-full text-center m-auto rounded-md h-auto mt-6 shadow-lg" key={mall.id}>
             <div className="box p-4">
@@ -319,9 +319,9 @@ function Dashboard() {
               <p className="mt-6 mb-4 text-[20px] text-blue-500">Zakaz vaqti: {mall.firstData}</p>
               <p className="mt-6 text-[21px] text-green-600 font-semibold">To'yxona haqida: {mall.title}</p>
               <div className="border rounded-[10px] shadow-inner">
-                <h2 className="text-[18px]">Montajchilar ro'yxati:</h2>
-                <p>{mall.bekzod}</p>
-                <p>{mall.siroj}</p>
+                <h2 className="text-[18px] mt-[5px]">Montajchilar ro'yxati:</h2>
+                <p className="text-[18px]">{mall.bekzod}</p>
+                <p className="text-[18px] mb-[5px]">{mall.siroj}</p>
               </div>
 
               <p className="mt-6 mb-4 text-[22px] text-red-500">To'y xaqida ma'lumot:</p>
@@ -335,7 +335,6 @@ function Dashboard() {
               <div className="flex justify-evenly">
                 <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={() => handleEdit(mall.id, mall.title, mall.descript, mall.img, mall.montaj, mall.firstData, mall.bekzod, mall.siroj)}>Edit</button>
                 <button className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={() => handleDelete(mall.id)}>Delete</button>
-                {/* <button className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={() => setShowMontaj(true)}>Montaj</button> */}
               </div>
             </div>
           </div>
