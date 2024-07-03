@@ -187,6 +187,7 @@ function Dashboard() {
         <button className="flex m-auto border w-[100px] h-[40px] items-center justify-center mt-[15px]" onClick={() => setShowForm(true)}>
           Add Data
         </button>
+                                              {/* Create Data */}
         {showForm && (
           <div className="overflow-hidden mt-10 p-4 border w-full h-full border-gray-300 rounded-md fixed top-0 left-0 right-0 backdrop-blur-[100px]">
             <button onClick={() => setShowForm(false)} className="text-[30px] absolute top-[20px] left-[95%]">
@@ -280,7 +281,7 @@ function Dashboard() {
               </button>
             </form>
           </div>
-        )}
+        )} 
         {showMontaj && (
           <div className="overflow-hidden mt-10 p-4 border w-full h-full border-gray-300 rounded-md fixed top-0 left-0 right-0 backdrop-blur-[100px]">
             <button onClick={() => setShowMontaj(false)} className="text-[30px] absolute top-[20px] left-[95%]">
@@ -311,6 +312,9 @@ function Dashboard() {
           </div>
         )}
       </div>
+
+                                              {/* Ekranga chiqarish */}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-[50px]">
         {box.map((mall) => (
           <div className="border border-black max-w-full max-h-full text-center m-auto rounded-md h-auto mt-6 shadow-lg" key={mall.id}>
