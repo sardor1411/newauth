@@ -314,7 +314,7 @@ function Dashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-[50px]">
         {box.map((mall) => (
           <div className="border border-black max-w-full max-h-full text-center m-auto rounded-md h-auto mt-6 shadow-lg" key={mall.id}>
-            <div className="box p-4">1
+            <div className="box p-4">
               <img className="w-full h-64 object-cover rounded-t-md" src={mall.img} alt={mall.title} />
               <p className="mt-6 mb-4 text-[20px] text-blue-500">Zakaz vaqti: {mall.firstData}</p>
               <p className="mt-6 text-[21px] text-green-600 font-semibold">To'yxona haqida: {mall.title}</p>
