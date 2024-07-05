@@ -55,7 +55,7 @@ function Dashboard() {
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    if (title === "" || des === "" || img === null || montaj === "" || firstData === "" ) {
+    if (title === "" || des === "" || img === null || montaj === "" || firstData === "") {
       return notification.error({
         message: "Input bo'sh",
         description: "Malumot to'liq kiritilmagan"
@@ -291,191 +291,202 @@ function Dashboard() {
 
   return (
     <>
-      <div>
+      <div className="">
         <button className="flex m-auto border w-[100px] h-[40px] items-center justify-center mt-[15px]" onClick={() => setShowForm(true)}>
           Add Data
         </button>
         {/* Create Data */}
         {showForm && (
-          <div className="overflow-hidden mt-10 p-4 border w-full h-full border-gray-300 rounded-md fixed top-0 left-0 right-0 backdrop-blur-[100px]">
+          <div className=" overflow-hidden mt-10 p-4 border w-full h-full border-gray-300 rounded-md fixed top-[-40px] left-0 right-0 backdrop-blur-[100px]">
             <button onClick={() => setShowForm(false)} className="text-[30px] absolute top-[20px] left-[95%]">
               <IoIosCloseCircleOutline />
             </button>
             <h2 className="text-2xl mb-4 font-[700]">Create New Post</h2>
             <form onSubmit={isUpdate ? handleUpdate : handleCreate}>
-              <div>
-                <label htmlFor="date">
-                  <h1 className="mb-[10px]">Vaqtni kiriting</h1>
-                  <input
-                    id="date"
-                    type="date"
-                    className="block w-[25%] p-2 mb-4 border border-gray-300 rounded-md"
-                    value={firstData}
-                    onChange={(e) => setFirstData(e.target.value)}
-                  />
-                </label>
-                <input
-                  type="text"
-                  placeholder="To'y Xona"
-                  className="block w-[25%] p-2 mb-4 border border-gray-300 rounded-md"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-                <textarea
-                  placeholder="To'y xaqida ma'lumotlar"
-                  className="block w-[25%] p-2 mb-4 border border-gray-300 rounded-md"
-                  value={des}
-                  onChange={(e) => setDes(e.target.value)}
-                />
-                <input
-                  type="file"
-                  className="block w-[25%] p-2 mb-4 border border-gray-300 rounded-md"
-                  onChange={handleFileChange}
-                />
-                <h1 className="text-black text-[20px] mb-[10px]">Montaj qilinganmi?</h1>
-                <div className="flex mb-[15px]">
-                  <label htmlFor="ha" className="flex text-black">
-                    Bajarildi
-                    <input
-                      type="radio"
-                      id="ha"
-                      name="montaj"
-                      value="Bajarildi"
-                      checked={montaj === 'Bajarildi'}
-                      onChange={(e) => setMontaj(e.target.value)}
-                      className="ml-2"
-                    />
-                  </label>
-                  <label htmlFor="yo'q" className="ml-5 flex text-black">
-                    Bajartilmadi
-                    <input
-                      type="radio"
-                      id="yo'q"
-                      name="montaj"
-                      value="Bajartilmadi"
-                      checked={montaj === 'Bajartilmadi'}
-                      onChange={(e) => setMontaj(e.target.value)}
-                      className="ml-2"
-                    />
-                  </label>
-                </div>
-                <div className="flex mb-[15px]">
-                  <label htmlFor="bekzod" className="flex text-black">
-                    Bekzod
-                    <input
-                      type="checkbox"
-                      id="bekzod"
-                      name="bekzod"
-                      checked={bekzodChecked}
-                      onChange={handleBekzodChange}
-                      className="ml-2"
-                    />
-                  </label>
-                  <label htmlFor="siroj" className="ml-5 flex text-black">
-                    Siroj
-                    <input
-                      type="checkbox"
-                      id="siroj"
-                      name="siroj"
-                      checked={sirojChecked}
-                      onChange={handleSirojChange}
-                      className="ml-2"
-                    />
-                  </label>
-                  <label htmlFor="murod" className="ml-5 flex text-black">
-                    Murod
-                    <input
-                      type="checkbox"
-                      id="murod"
-                      name="murod"
-                      checked={murodChecked}
-                      onChange={handleMurodChange}
-                      className="ml-2"
-                    />
-                  </label>
-                </div>
-                <h1 className="text-black text-[20px] mb-[10px]">Video Operator</h1>
-                <div className="flex mb-[15px]">
-                  <label htmlFor="zafar" className="flex text-black">
-                    Zafar
-                    <input
-                      type="checkbox"
-                      id="zafar"
-                      name="zafar"
-                      checked={zafarChecked}
-                      onChange={handleZafarChange}
-                      className="ml-2"
-                    />
-                  </label>
-                  <label htmlFor="abror" className="ml-5 flex text-black">
-                    Abror
-                    <input
-                      type="checkbox"
-                      id="abror"
-                      name="abror"
-                      checked={abrorChecked}
-                      onChange={handleAbrorChange}
-                      className="ml-2"
-                    />
-                  </label>
-                  <label htmlFor="vohid" className="ml-5 flex text-black">
-                    Vohid
-                    <input
-                      type="checkbox"
-                      id="vohid"
-                      name="vohid"
-                      checked={vohidChecked}
-                      onChange={handleVohidChange}
-                      className="ml-2"
-                    />
-                  </label>
-                  <label htmlFor="otabek" className="ml-5 flex text-black">
-                    Otabek
-                    <input
-                      type="checkbox"
-                      id="otabek"
-                      name="otabek"
-                      checked={otabekChecked}
-                      onChange={handleOtabekChange}
-                      className="ml-2"
-                    />
-                  </label>
-                  <label htmlFor="asror" className="ml-5 flex text-black">
-                    Asror
-                    <input
-                      type="checkbox"
-                      id="asror"
-                      name="asror"
-                      checked={asrorChecked}
-                      onChange={handleAsrorChange}
-                      className="ml-2"
-                    />
-                  </label>
-                  <label htmlFor="atham" className="ml-5 flex text-black">
-                    Atham
-                    <input
-                      type="checkbox"
-                      id="atham"
-                      name="atham"
-                      checked={athamChecked}
-                      onChange={handleAthamChange}
-                      className="ml-2"
-                    />
-                  </label>
-                  <label htmlFor="elyor" className="ml-5 flex text-black">
-                    Elyor
-                    <input
-                      type="checkbox"
-                      id="elyor"
-                      name="elyor"
-                      checked={elyorChecked}
-                      onChange={handleElyorChange}
-                      className="ml-2"
-                    />
-                  </label>
+              <div >
+                <div className="w-[40%] border flex justify-between ">
 
+                  <div>
+
+
+                    <label htmlFor="date">
+                      <h1 className="mb-[10px]">Vaqtni kiriting</h1>
+                      <input
+                        id="date"
+                        type="date"
+                        className="block w-[70%] p-2 mb-4 border border-gray-300 rounded-md"
+                        value={firstData}
+                        onChange={(e) => setFirstData(e.target.value)}
+                      />
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="To'y Xona"
+                      className="block w-[70%] p-2 mb-4 border border-gray-300 rounded-md"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                    />
+                    <textarea
+                      placeholder="To'y xaqida ma'lumotlar"
+                      className="block w-[70%] p-2 mb-4 border border-gray-300 rounded-md"
+                      value={des}
+                      onChange={(e) => setDes(e.target.value)}
+                    />
+                    <input
+                      type="file"
+                      className="block w-[70%] p-2 mb-4 border border-gray-300 rounded-md"
+                      onChange={handleFileChange}
+                    />
+                  </div>
+                  <div className="">
+                    <h1 className="text-black text-[20px] mb-[10px]">Montaj qilinganmi?</h1>
+                    <div className="flex mb-[15px]">
+                      <label htmlFor="ha" className="flex text-black">
+                        Bajarildi
+                        <input
+                          type="radio"
+                          id="ha"
+                          name="montaj"
+                          value="Bajarildi"
+                          checked={montaj === 'Bajarildi'}
+                          onChange={(e) => setMontaj(e.target.value)}
+                          className="ml-2"
+                        />
+                      </label>
+                      <label htmlFor="yo'q" className="ml-5 flex text-black">
+                        Bajartilmadi
+                        <input
+                          type="radio"
+                          id="yo'q"
+                          name="montaj"
+                          value="Bajartilmadi"
+                          checked={montaj === 'Bajartilmadi'}
+                          onChange={(e) => setMontaj(e.target.value)}
+                          className="ml-2"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex mb-[15px]">
+                      <label htmlFor="bekzod" className="flex text-black">
+                        Bekzod
+                        <input
+                          type="checkbox"
+                          id="bekzod"
+                          name="bekzod"
+                          checked={bekzodChecked}
+                          onChange={handleBekzodChange}
+                          className="ml-2"
+                        />
+                      </label>
+                      <label htmlFor="siroj" className="ml-5 flex text-black">
+                        Siroj
+                        <input
+                          type="checkbox"
+                          id="siroj"
+                          name="siroj"
+                          checked={sirojChecked}
+                          onChange={handleSirojChange}
+                          className="ml-2"
+                        />
+                      </label>
+                      <label htmlFor="murod" className="ml-5 flex text-black">
+                        Murod
+                        <input
+                          type="checkbox"
+                          id="murod"
+                          name="murod"
+                          checked={murodChecked}
+                          onChange={handleMurodChange}
+                          className="ml-2"
+                        />
+                      </label>
+                    </div>
+                    <h1 className="text-black text-[20px] mb-[10px]">Video Operator</h1>
+                    <div className="flex mb-[15px]">
+                      <label htmlFor="zafar" className="flex text-black">
+                        Zafar
+                        <input
+                          type="checkbox"
+                          id="zafar"
+                          name="zafar"
+                          checked={zafarChecked}
+                          onChange={handleZafarChange}
+                          className="ml-2"
+                        />
+                      </label>
+                      <label htmlFor="abror" className="ml-5 flex text-black">
+                        Abror
+                        <input
+                          type="checkbox"
+                          id="abror"
+                          name="abror"
+                          checked={abrorChecked}
+                          onChange={handleAbrorChange}
+                          className="ml-2"
+                        />
+                      </label>
+                      <label htmlFor="vohid" className="ml-5 flex text-black">
+                        Vohid
+                        <input
+                          type="checkbox"
+                          id="vohid"
+                          name="vohid"
+                          checked={vohidChecked}
+                          onChange={handleVohidChange}
+                          className="ml-2"
+                        />
+                      </label>
+                      <label htmlFor="otabek" className="ml-5 flex text-black">
+                        Otabek
+                        <input
+                          type="checkbox"
+                          id="otabek"
+                          name="otabek"
+                          checked={otabekChecked}
+                          onChange={handleOtabekChange}
+                          className="ml-2"
+                        />
+                      </label>
+                    </div>
+                    <div className="flex mb-[15px]">
+                      <label htmlFor="asror" className="ml-5 flex text-black">
+                        Asror
+                        <input
+                          type="checkbox"
+                          id="asror"
+                          name="asror"
+                          checked={asrorChecked}
+                          onChange={handleAsrorChange}
+                          className="ml-2"
+                        />
+                      </label>
+                      <label htmlFor="atham" className="ml-5 flex text-black">
+                        Atham
+                        <input
+                          type="checkbox"
+                          id="atham"
+                          name="atham"
+                          checked={athamChecked}
+                          onChange={handleAthamChange}
+                          className="ml-2"
+                        />
+                      </label>
+                      <label htmlFor="elyor" className="ml-5 flex text-black">
+                        Elyor
+                        <input
+                          type="checkbox"
+                          id="elyor"
+                          name="elyor"
+                          checked={elyorChecked}
+                          onChange={handleElyorChange}
+                          className="ml-2"
+                        />
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
+
               <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 {isUpdate ? 'Update' : "Yaratish"}
               </button>
