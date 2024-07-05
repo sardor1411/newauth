@@ -55,7 +55,7 @@ function Dashboard() {
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    if (title === "" || des === "" || img === null || montaj === "" || firstData === "" ) {
+    if (title === "" || des === "" || img === null || montaj === "" || firstData === "" || bekzodChecked === "" || sirojChecked === "" || murodChecked === "") {
       return notification.error({
         message: "Input bo'sh",
         description: "Malumot to'liq kiritilmagan"
@@ -142,13 +142,16 @@ function Dashboard() {
     setBekzod(bekzod);
     setSiroj(siroj);
     setMurod(murod)
-    setZafar(zafar);
-    setAbror(abror);
-    setVohid(vohid);
-    setOtabek(otabek);
-    setAsror(asror);
-    setAtham(atham);
-    setElyor(elyor);
+    setBekzodChecked(bekzod === 'Bekzod');
+    setSirojChecked(siroj === 'Siroj');
+    setMurodChecked(murod === 'Murod');
+    setZafarChecked(zafar === 'Zafar');
+    setAbrorChecked(abror === 'Abror');
+    setVohidChecked(vohid === 'Vohid');
+    setOtabekChecked(otabek === 'Otabek');
+    setAsrorChecked(asror === 'Asror');
+    setAthamChecked(atham === 'Atham');
+    setElyorChecked(elyor === 'Elyor');
     setIsUpdate(true);
     setShowForm(true);
   };
@@ -229,6 +232,7 @@ function Dashboard() {
     setBekzod("");
     setSiroj("");
     setMurod("");
+
     setZafar("");
     setAbror("");
     setVohid("");
@@ -548,12 +552,7 @@ function Dashboard() {
               />
               <p className="mt-6 mb-4 text-[23px] text-blue-500"> Montaj bajarilganmi : <span className="text-green-600 font-[600]">{mall.montaj}</span></p>
               <div className="flex justify-evenly">
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={() => handleEdit(mall.id, mall.title, mall.descript,
-                  mall.img, mall.montaj,
-                  mall.firstData, mall.bekzod, mall.siroj,
-                  mall.murod, mall.zafar, mall.abror,
-                  mall.vohid, mall.otabek, mall.asror,
-                  mall.atham, mall.elyor)}>Edit</button>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={() => handleEdit(mall.id, mall.title, mall.descript, mall.img, mall.montaj, mall.firstData, mall.bekzod, mall.siroj)}>Edit</button>
                 <button className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={() => handleDelete(mall.id)}>Delete</button>
               </div>
             </div>

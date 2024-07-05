@@ -43,7 +43,17 @@ function Home() {
                                     <h2 className="text-[18px]">Montajchilar ro'yxati:</h2>
                                     <p className="text-[18px]">{mall.bekzod}</p>
                                     <p className="text-[18px]">{mall.siroj}</p>
-                                </div><br />    
+                                </div><br />
+                                <div className="border rounded-[10px] shadow-inner mb-[10px]">
+                                    <h2 className="text-[18px] mt-[5px] h-auto">Video Operator:</h2>
+                                    <p className="text-[18px]">{mall.zafar}</p>
+                                    <p className="text-[18px] mb-[5px]">{mall.abror}</p>
+                                    <p className="text-[18px] mb-[5px]">{mall.vohid}</p>
+                                    <p className="text-[18px]">{mall.otabek}</p>
+                                    <p className="text-[18px] mb-[5px]">{mall.asror}</p>
+                                    <p className="text-[18px] mb-[5px]">{mall.atham}</p>
+                                    <p className="text-[18px] mb-[5px]">{mall.elyor}</p>
+                                </div>
                                 <textarea
                                     value={mall.descript}
                                     placeholder="Ma'lumotlar"
