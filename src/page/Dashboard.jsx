@@ -351,7 +351,7 @@ function Dashboard() {
                           checked={montaj === 'Bajarildi'}
                           onChange={(e) => setMontaj(e.target.value)}
                           className="ml-2"
-                        />
+                        /> 
                       </label>
                       <label htmlFor="yo'q" className="ml-5 flex text-black">
                         Bajartilmadi
