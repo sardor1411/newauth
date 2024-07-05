@@ -337,7 +337,7 @@ function Dashboard() {
                       className="block w-[70%] p-2 mb-4 border border-gray-300 rounded-md"
                       onChange={handleFileChange}
                     />
-                  </div>
+                  </div> 
                   <div className="">
                     <h1 className="text-black text-[20px] mb-[10px]">Montaj qilinganmi?</h1>
                     <div className="flex mb-[15px]">
