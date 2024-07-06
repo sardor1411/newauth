@@ -55,10 +55,12 @@ function Dashboard() {
 
   const handleCreate = async (e) => {
     e.preventDefault();
+    setShowForm(false)
     if (title === "" || des === "" || img === null || montaj === "" || firstData === "") {
       return notification.error({
         message: "Input bo'sh",
         description: "Malumot to'liq kiritilmagan"
+        
       });
     }
 
@@ -166,6 +168,8 @@ function Dashboard() {
     const asrorName = asrorChecked ? 'Asror' : '';
     const athamName = athamChecked ? 'Atham' : '';
     const elyorName = elyorChecked ? 'Elyor' : '';
+    setShowForm(false)
+
 
 
     await updateDoc(updateData, {

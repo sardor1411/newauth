@@ -35,7 +35,7 @@ const SignIn = () => {
                         password: '',
                     });
                     if(user?.role === 'user'){
-                        navigate('userpage');
+                        navigate('/userpage');
                         notification.success({
                             message: 'Xush kelibsiz foydalanuvchi',
                         });

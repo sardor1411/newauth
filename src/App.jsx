@@ -59,9 +59,6 @@ function App() {
             </>}
 
 
-            {user && <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue ' onClick={handleSignOut}>
-              <Link>Sign Out</Link>
-            </li>}
 
             <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
               <NavLink to="/dashboard">Dashboard</NavLink>
@@ -69,9 +66,12 @@ function App() {
             <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
               <NavLink to="/userpage">UserPage</NavLink>
             </li>
-            <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
+            {user && <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue ' onClick={handleSignOut}>
+              <Link>Sign Out</Link>
+            </li>}
+            {/* <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
               <NavLink to="/signup">signup</NavLink>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </div>
