@@ -1,30 +1,59 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from "../firebase";
-import { AuthContext } from "../context/AuthContext";
-import {  useNavigate } from "react-router-dom";
+import { auth, db } from "../firebase";
+import { json, useNavigate } from "react-router-dom";
+import { collection, onSnapshot, query, QuerySnapshot, where } from "firebase/firestore";
+import { notification } from "antd";
 
 const SignIn = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const { dispatch } = useContext(AuthContext);
+    const [userLogin, setUserLogin] = useState({
+        email: "",
+        password: "",
+    })
     const navigate = useNavigate();
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const users = await signInWithEmailAndPassword(
+                auth,
+                userLogin.email,
+                userLogin.password
+            )
+            try {
+                const q = query(
+                    collection(db, 'user'),
+                    where('uid', '==', users?.user?.uid),
+                );
+                const data = onSnapshot(q, (QuerySnapshot) => {
+                    let user;
+                    QuerySnapshot.forEach((doc) => (user = doc.data()));
+                    localStorage.setItem('users', JSON.stringify(user));
 
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-
-                dispatch({ type: "LOGIN", payload: true });
-                navigate('/dashboard'); 
-                console.log(user);
-            })
-            .catch((error) => {
-                const errorMessage = error.message;
-                console.log(errorMessage);
-            });
+                    setUserLogin({
+                        email: '',
+                        password: '',
+                    });
+                    if(user?.role === 'user'){
+                        navigate('userpage');
+                        notification.success({
+                            message: 'Xush kelibsiz foydalanuvchi',
+                        });
+                    } else {
+                        navigate('/dashboard');
+                        notification.success({
+                            message: 'Xush kelibsiz Admin',
+                        });
+                    }
+                });
+                return () => data;
+            }
+            catch (error) {
+                console.log(error);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -35,11 +64,24 @@ const SignIn = () => {
                         <h2 className="text-gray-900 text-lg font-medium title-font mb-5">Sign In</h2>
                         <div className="relative mb-4">
                             <label htmlFor="email" className="leading-7 text-sm text-gray-600">Email</label>
-                            <input onChange={(e) => setEmail(e.target.value)} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            <input
+                                value={userLogin.email}
+                                onChange={(e) => {
+                                    setUserLogin({
+                                        ...userLogin,
+                                        email: e.target.value,
+                                    })
+                                }} type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         </div>
                         <div className="relative mb-4">
                             <label htmlFor="password" className="leading-7 text-sm text-gray-600">Password</label>
-                            <input onChange={(e) => setPassword(e.target.value)} type="password" id="password" name="password" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                            <input value={userLogin.password}
+                                onChange={(e) => {
+                                    setUserLogin({
+                                        ...userLogin,
+                                        password: e.target.value,
+                                    })
+                                }} type="password" id="password" name="password" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         </div>
                         <button className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
                     </form>

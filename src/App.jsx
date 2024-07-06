@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
-import { Routes, Route, NavLink, Navigate, Link } from 'react-router-dom';
+import { Routes, Route, NavLink, Navigate, Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
-import { signOut } from 'firebase/auth';
-import { auth } from './firebase';
+// import { signOut } from 'firebase/auth';
+// import { auth } from './firebase';
 import Dashboard from './page/Dashboard';
 import Blog from './page/Blog';
 import SignUp from './page/SignUp';
@@ -10,28 +10,21 @@ import SignIn from './page/SignIn';
 import Home from './page/Home';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
-
+import { ProtectRouteAdmin } from './protectedRoutes/ProtectRoutAdmin';
+import { UserPage } from './page/UserPage';
+import { ProtectRouteUser } from './protectedRoutes/ProtectRoutUser';
 
 
 
 function App() {
-  const { currentUser } = useContext(AuthContext);
+  let user = localStorage.getItem('users')
   const [navbarOpen, setNavbarOpen] = useState(false);
   const { dispatch } = useContext(AuthContext);
-
-
-  const RequireAuth = ({ children }) => {
-    return currentUser ? children : <Navigate to='/signin' />;
-  };
+  const navigate = useNavigate();
 
   const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        dispatch({ type: "LOGOUT", payload: null });
-      })
-      .catch((error) => {
-        console.error('hechnma', error);
-      });
+    localStorage.removeItem('users')
+    navigate('/signin')
   };
 
   const toggleNavbar = () => {
@@ -58,20 +51,26 @@ function App() {
             <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
               <NavLink to="/blog">Blog</NavLink>
             </li>
-            {!currentUser && (
-              <>
-                <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
-                  <NavLink to="/signin">Sign In</NavLink>
-                </li>
-              </>
-            )}
-            {currentUser && (
-              <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue ' onClick={handleSignOut}>
-                <Link>Sign Out</Link>
+
+            {!user && <>
+              <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
+                <NavLink to="/signin">Sign In</NavLink>
               </li>
-            )}
+            </>}
+
+
+            {user && <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue ' onClick={handleSignOut}>
+              <Link>Sign Out</Link>
+            </li>}
+
             <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
               <NavLink to="/dashboard">Dashboard</NavLink>
+            </li>
+            <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
+              <NavLink to="/userpage">UserPage</NavLink>
+            </li>
+            <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
+              <NavLink to="/signup">signup</NavLink>
             </li>
           </ul>
         </nav>
@@ -81,7 +80,10 @@ function App() {
         <Route element={<Blog />} path='/blog' />
         <Route element={<SignUp />} path='/signup' />
         <Route element={<SignIn />} path='/signin' />
-        <Route element={<RequireAuth><Dashboard /></RequireAuth>} path='/dashboard' />
+        <Route element={<SignUp />} path='/signup' />
+        <Route element={<ProtectRouteUser><UserPage /></ProtectRouteUser>} path='/userpage' />
+
+        <Route element={<ProtectRouteAdmin><Dashboard /></ProtectRouteAdmin>} path='/dashboard' />
         <Route element={<Home />} path='/home' />
         <Route element={<Home />} path='/' />
       </Routes>
