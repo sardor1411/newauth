@@ -13,6 +13,8 @@ import { IoMenu } from "react-icons/io5";
 import { ProtectRouteAdmin } from './protectedRoutes/ProtectRoutAdmin';
 import { UserPage } from './page/UserPage';
 import { ProtectRouteUser } from './protectedRoutes/ProtectRoutUser';
+import { Bekzod } from './page/Bekzod';
+import { ProtectRouteBekzod } from './protectedRoutes/ProtectRouteBekzod';
 
 
 
@@ -64,6 +66,9 @@ function App() {
               <NavLink to="/dashboard">Dashboard</NavLink>
             </li>
             <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
+              <NavLink to="/bekzod">Bekzod</NavLink>
+            </li>
+            <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
               <NavLink to="/userpage">UserPage</NavLink>
             </li>
             {user && <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue ' onClick={handleSignOut}>
@@ -82,6 +87,7 @@ function App() {
         <Route element={<SignIn />} path='/signin' />
         <Route element={<SignUp />} path='/signup' />
         <Route element={<ProtectRouteUser><UserPage /></ProtectRouteUser>} path='/userpage' />
+        <Route element={<ProtectRouteBekzod><Bekzod /></ProtectRouteBekzod>} path='/bekzod' />
 
         <Route element={<ProtectRouteAdmin><Dashboard /></ProtectRouteAdmin>} path='/dashboard' />
         <Route element={<Home />} path='/home' />
