@@ -5,7 +5,7 @@ export const ProtectRouteBekzod = ({children}) => {
     if (user) {
         user = JSON.parse(user);
     }
-    if (user && (user.role === "bekzod" )) {
+    if (user && (user.role === "bekzod" || user.role === "admin")) {
         return children;
     } else {
         return <Navigate to='/signin' />;

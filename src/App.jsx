@@ -1,8 +1,6 @@
 import { useState, useContext } from 'react';
 import { Routes, Route, NavLink, Navigate, Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
-// import { signOut } from 'firebase/auth';
-// import { auth } from './firebase';
 import Dashboard from './page/Dashboard';
 import Blog from './page/Blog';
 import SignUp from './page/SignUp';
@@ -43,7 +41,7 @@ function App() {
         </nav>
       </div>
 
-      <div className={`nav w-[31%] backdrop-blur-[10px] h-[100%] fixed top-[0px] border ${navbarOpen ? 'block' : 'hidden'}`}>
+      <div className={`nav w-[31%] backdrop-blur-[100px] h-[100%] fixed top-[0px] border   ${navbarOpen ? 'right-[1]' : 'fixed right-[100%]'}`}>
         <nav>
           <button className='text-[35px] absolute top-0 left-[80%]' onClick={toggleNavbar}><IoIosCloseCircleOutline /></button>
           <ul className=' w-[80%] m-auto gap-2 h-[50px] grid items-center justify-center'>
@@ -59,12 +57,10 @@ function App() {
                 <NavLink to="/signin">Sign In</NavLink>
               </li>
             </>}
-
-
-
             <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
               <NavLink to="/dashboard">Dashboard</NavLink>
             </li>
+
             <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
               <NavLink to="/bekzod">Bekzod</NavLink>
             </li>
