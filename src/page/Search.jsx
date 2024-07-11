@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { collection, onSnapshot, query, where, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { BsSearch } from "react-icons/bs";
-import Search from "./Search";
 
 // SearchByDate komponenti
 const SearchByDate = ({ setSearchResults }) => {
@@ -59,8 +58,8 @@ const SearchByDate = ({ setSearchResults }) => {
     );
 };
 
-// Home komponenti
-const Home = () => {
+// Search komponenti
+const Search = () => {
     const [box, setBox] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
 
@@ -168,4 +167,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Search;

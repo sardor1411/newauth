@@ -5,6 +5,7 @@ import { v4 as uuid } from "uuid";
 import { collection, addDoc, deleteDoc, onSnapshot, updateDoc, doc } from "firebase/firestore";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { db } from "../firebase";
+import Search from "./Search";
 
 function Dashboard() {
   const [box, setBox] = useState([]);

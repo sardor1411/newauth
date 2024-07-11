@@ -13,6 +13,7 @@ import { UserPage } from './page/UserPage';
 import { ProtectRouteUser } from './protectedRoutes/ProtectRoutUser';
 import { Bekzod } from './page/Bekzod';
 import { ProtectRouteBekzod } from './protectedRoutes/ProtectRouteBekzod';
+import Search from './page/Search';
 
 
 
@@ -82,6 +83,8 @@ function App() {
         <Route element={<SignUp />} path='/signup' />
         <Route element={<SignIn />} path='/signin' />
         <Route element={<SignUp />} path='/signup' />
+        <Route element={<Search />} path='/search' />
+
         <Route element={<ProtectRouteUser><UserPage /></ProtectRouteUser>} path='/userpage' />
         <Route element={<ProtectRouteBekzod><Bekzod /></ProtectRouteBekzod>} path='/bekzod' />
         <Route element={<ProtectRouteAdmin><Dashboard /></ProtectRouteAdmin>} path='/dashboard' />
