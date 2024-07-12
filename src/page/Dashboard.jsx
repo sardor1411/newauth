@@ -20,8 +20,8 @@ const SearchByDate = ({ setSearchResults }) => {
     if (searchDate) {
       try {
         const q = query(
-          collection(db, 'blogs'), // Kolleksiya nomi to'g'ri ekanligiga ishonch hosil qiling
-          where('firstData', '==', searchDate) // Qidiruv shartini to'g'ri kiriting
+          collection(db, 'blogs'),
+          where('firstData', '==', searchDate)
         );
 
         const querySnapshot = await getDocs(q);
