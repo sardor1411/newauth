@@ -1,24 +1,17 @@
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
-import { Routes, Route, NavLink, Navigate, Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
-import Dashboard from './page/Dashboard';
-import Blog from './page/Blog';
 import SignUp from './page/SignUp';
 import SignIn from './page/SignIn';
-import Home from './page/Home';
+
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
 import { ProtectRouteAdmin } from './protectedRoutes/ProtectRoutAdmin';
-import { UserPage } from './page/UserPage';
 import { ProtectRouteUser } from './protectedRoutes/ProtectRoutUser';
-import Bekzod from './page/Bekzod';
-import { ProtectRouteBekzod } from './protectedRoutes/ProtectRouteBekzod';
-import Search from './page/Search';
-
-
+import TapBot from './page/TapBot';
 
 function App() {
-  let user = localStorage.getItem('users')
+  let user = localStorage.getItem('users');
   const [navbarOpen, setNavbarOpen] = useState(false);
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -113,16 +106,10 @@ function App() {
                   <Link className="md:p-2 lg:px-4 font-semibold block text-white px-4 py-1">Sign Out</Link>
                 </li>
               )}
-              {/* 
-  <li className="col-span-2 md:col-auto">
-    <Link className="md:p-2 lg:px-4 font-semibold block text-white px-4 py-1" to="/signup">Sign Up</Link>
-  </li>
-  */}
             </ul>
           </div>
         </div>
       </nav>
-
 
       <div className='w-full border'>
         <nav className='flex w-[80%] m-auto justify-evenly gap-2 h-[50px] items-center'>
@@ -131,8 +118,6 @@ function App() {
           </button>
         </nav>
       </div>
-
-
 
       <div className={`nav w-[31%] backdrop-blur-[100px] h-[100%] fixed top-[0px] border   ${navbarOpen ? 'right-[1]' : 'fixed right-[200%]'}`}>
         <nav>
@@ -144,7 +129,6 @@ function App() {
             <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
               <NavLink to="/blog">Blog</NavLink>
             </li>
-
             {!user && <>
               <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
                 <NavLink to="/signin">Sign In</NavLink>
@@ -153,35 +137,26 @@ function App() {
             <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
               <NavLink to="/dashboard">Dashboard</NavLink>
             </li>
-
             <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
               <NavLink to="/bekzod">Bekzod</NavLink>
             </li>
             <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
-              <NavLink to="/userpage">UserPage</NavLink>
+              <NavLink to="/userpage">User Page</NavLink>
             </li>
-            {user && <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue ' onClick={handleSignOut}>
-              <Link>Sign Out</Link>
+            {user && <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
+              <NavLink to="/signin" onClick={handleSignOut}>Sign Out</NavLink>
             </li>}
-            {/* <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
-              <NavLink to="/signup">signup</NavLink>
-            </li> */}
           </ul>
         </nav>
       </div>
 
       <Routes>
-        <Route element={<Blog />} path='/blog' />
-        <Route element={<SignUp />} path='/signup' />
-        <Route element={<SignIn />} path='/signin' />
-        <Route element={<SignUp />} path='/signup' />
-        <Route element={<Search />} path='/search' />
-
-        <Route element={<ProtectRouteUser><UserPage /></ProtectRouteUser>} path='/userpage' />
-        <Route element={<ProtectRouteBekzod><Bekzod /></ProtectRouteBekzod>} path='/bekzod' />
-        <Route element={<ProtectRouteAdmin><Dashboard /></ProtectRouteAdmin>} path='/dashboard' />
-        <Route element={<Home />} path='/home' />
-        <Route element={<Home />} path='/' />
+        <Route path="/tapbot" element={<TapBot />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/userpage" element={<ProtectRouteAdmin><TapBot /></ProtectRouteAdmin>} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/tapbot" element={<ProtectRouteUser><TapBot /></ProtectRouteUser>} />
       </Routes>
     </>
   );
