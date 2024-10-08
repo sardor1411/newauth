@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { collection, onSnapshot, query, where, getDocs } from "firebase/firestore";
-import { db } from "../firebase";
+import { db1 } from "../firebase/firebase.jsx";
 import { BsSearch } from "react-icons/bs";
 import { notification } from 'antd';
 import { IoIosCloseCircleOutline } from "react-icons/io";
@@ -20,7 +20,7 @@ const SearchByDate = ({ setSearchResults }) => {
     if (searchDate) {
       try {
         const q = query(
-          collection(db, 'blogs'),
+          collection(db1, 'blogs'),
           where('firstData', '==', searchDate)
         );
 
@@ -102,7 +102,7 @@ const Dashboard = () => {
   const [athamChecked, setAthamChecked] = useState(false);
   const [elyorChecked, setElyorChecked] = useState(false);
 
-  const data = collection(db, 'blogs');
+  const data = collection(db1, 'blogs');
   const storage = getStorage();
 
   useEffect(() => {
@@ -190,7 +190,7 @@ const Dashboard = () => {
   };
 
   const handleDelete = async (id) => {
-    const deletePost = doc(db, 'blogs', id);
+    const deletePost = doc(db1, 'blogs', id);
     await deleteDoc(deletePost);
     console.log(`Deleted post with id: ${id}`);
   };
@@ -218,7 +218,7 @@ const Dashboard = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const updateData = doc(db, 'blogs', id);
+    const updateData = doc(db1, 'blogs', id);
     const bekzodName = bekzodChecked ? 'Bekzod' : '';
     const sirojName = sirojChecked ? 'Siroj' : '';
     const murodName = murodChecked ? 'Murod' : '';
@@ -258,7 +258,7 @@ const Dashboard = () => {
   const handleMontaj = async (e) => {
     e.preventDefault();
     try {
-      await addDoc(collection(db, 'montaj'), {
+      await addDoc(collection(db1, 'montaj'), {
         bekzod,
         siroj,
         murod,
@@ -356,7 +356,7 @@ const Dashboard = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    const data = collection(db, 'blogs');
+    const data = collection(db1, 'blogs');
     const unsubscribe = onSnapshot(data, (snapshot) => {
       const malumot = [];
       snapshot.docs.forEach((doc) => {
@@ -379,7 +379,7 @@ const Dashboard = () => {
   };
 
   return (
-    <>
+    <div className="mt-[70px]">
 
       <button className="flex m-auto border w-[100px] h-[40px] items-center justify-center mt-[15px]" onClick={() => setShowForm(true)}>
         Add Data
@@ -674,7 +674,7 @@ const Dashboard = () => {
           ))
         )}
       </div>
-    </>
+    </div>
   )
 }
 

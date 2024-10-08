@@ -1,9 +1,4 @@
 
-import { collection } from "firebase/firestore"
-import { db } from "../firebase"
-let data = collection(db, 'blog')
-
-
 function Blog() {
 
     return (

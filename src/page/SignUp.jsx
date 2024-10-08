@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, db } from "../firebase";
+import { auth1, db1 } from "../firebase/firebase.jsx";
 import { Link } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 
@@ -18,7 +18,7 @@ const SignUp = () => {
 
         try {
             const users = await createUserWithEmailAndPassword(
-                auth,
+                auth1,
                 userSignup.email,
                 userSignup.password
             )
@@ -35,7 +35,7 @@ const SignUp = () => {
                 }),
             }
 
-            const userData = collection(db, 'user')
+            const userData = collection(db1, 'user')
             addDoc(userData, user);
 
         } catch (error) {

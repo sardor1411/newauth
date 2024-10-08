@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            width: 320px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .date {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .title {
+            margin: 10px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .list h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        .list ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-height: 50px;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+        }
+
+        .list ul.expanded {
+            max-height: 200px;
+        }
+
+        .list li {
+            background-color: #f1f1f1;
+            margin: 4px 0;
+            padding: 8px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .toggle-arrow {
+            background: none;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 5px;
+            transition: transform 0.3s;
+        }
+
+        .toggle-arrow.expanded {
+            transform: rotate(180deg);
+        }
+
+        .checkbox {
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        .toggle-all {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <img src="./src/images/zilola media.png" alt="Image" class="card-image">
+        <div class="card-content">
+            <p class="date">2024-08-19</p>
+            <h2 class="title">Project Title</h2>
+            <div class="list">
+                <h3>Montajchilar:</h3>
+                <ul id="montaj-list">
+                    <li><span>Ism 1</span></li>
+                    <li><span>Ism 2</span></li>
+                    <li><span>Ism 3</span></li>
+                    <li><span>Ism 4</span></li>
+                </ul>
+                <button class="toggle-arrow" onclick="toggleList('montaj-list', this)">&#9660;</button>
+            </div>
+            <div class="list">
+                <h3>Video operatorlar:</h3>
+                <ul id="video-operator-list">
+                    <li><span>Ism 1</span></li>
+                    <li><span>Ism 2</span></li>
+                    <li><span>Ism 3</span></li>
+                    <li><span>Ism 4</span></li>
+                </ul>
+                <button class="toggle-arrow" onclick="toggleList('video-operator-list', this)">&#9660;</button>
+            </div>
+            <div class="toggle-all">
+                <span>Hammasi bajarildi</span>
+                <input type="checkbox" id="toggle-all-checkbox" class="checkbox" onclick="toggleAll(this)">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleList(listId, button) {
+            const list = document.getElementById(listId);
+
+            if (list.classList.contains('expanded')) {
+                list.classList.remove('expanded');
+                button.classList.remove('expanded');
+            } else {
+                list.classList.add('expanded');
+                button.classList.add('expanded');
+            }
+        }
+
+        function toggleAll(mainCheckbox) {
+            const checkboxes = document.querySelectorAll('.list .checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = mainCheckbox.checked;
+            });
+        }
+    </script>
+</body>
+
+</html>

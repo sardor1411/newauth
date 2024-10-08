@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { collection, onSnapshot, query, where, getDocs } from "firebase/firestore";
-import { db } from "../firebase";
+import { db1, storage1 } from "../firebase/firebase.jsx"; // Ensure correct import
+
+// Use `db1` and `storage1` as needed in your component
+
+
 import { BsSearch } from "react-icons/bs";
 import { message, notification } from 'antd';
 import { IoIosCloseCircleOutline } from "react-icons/io";
@@ -17,7 +21,7 @@ const SearchByDate = ({ setSearchResults }) => {
         if (searchDate) {
             try {
                 const q = query(
-                    collection(db, 'blogs'),
+                    collection(db1, 'blogs'),
                     where('firstData', '==', searchDate)
                 );
 
@@ -80,7 +84,7 @@ const Bekzod = () => {
     const [searchResults, setSearchResults] = useState([]);
 
     useEffect(() => {
-        const data = collection(db, 'blogs');
+        const data = collection(db1, 'blogs');
         const unsubscribe = onSnapshot(data, (snapshot) => {
             const malumot = [];
             snapshot.docs.forEach((doc) => {
@@ -109,7 +113,7 @@ const Bekzod = () => {
     const [showMontaj, setShowMontaj] = useState(false);
     const [isUpdate, setIsUpdate] = useState(false);
 
-    const data = collection(db, 'blogs');
+    const data = collection(db1, 'blogs');
     const storage = getStorage();
 
     useEffect(() => {
@@ -168,7 +172,7 @@ const Bekzod = () => {
     };
 
     const handleDelete = async (id) => {
-        const deletePost = doc(db, 'blogs', id);
+        const deletePost = doc(db1, 'blogs', id);
         await deleteDoc(deletePost);
         console.log(`Deleted post with id: ${id}`);
     };
@@ -183,7 +187,7 @@ const Bekzod = () => {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        const updateData = doc(db, 'blogs', id); // Use id from state
+        const updateData = doc(db1, 'blogs', id); // Use id from state
 
         try {
             await updateDoc(updateData, {

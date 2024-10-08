@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth, db } from "../firebase";
+import { auth1, db1 } from "../firebase/firebase.jsx";
 import { json, useNavigate } from "react-router-dom";
 import { collection, onSnapshot, query, QuerySnapshot, where } from "firebase/firestore";
 import { notification } from "antd";
@@ -16,13 +16,13 @@ const SignIn = () => {
         e.preventDefault();
         try {
             const users = await signInWithEmailAndPassword(
-                auth,
+                auth1,
                 userLogin.email,
                 userLogin.password
             )
             try {
                 const q = query(
-                    collection(db, 'user'),
+                    collection(db1, 'user'),
                     where('uid', '==', users?.user?.uid),
                 );
                 const data = onSnapshot(q, (QuerySnapshot) => {

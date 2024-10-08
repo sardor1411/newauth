@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.active{
+.active {
     border-radius: 20px;
     color: white;
     width: 100%;
@@ -12,3 +12,23 @@
     justify-content: center;
     background-color: rgb(59 130 246)
 }
+
+
+.grey-qo-regular {
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+}
+
+@media (max-width: 120px) {
+    .hidden-when-small {
+      display: none;
+    }
+  }
+  
+.dark{
+  background-color: black;
+  transform: translate(2s);
+}
+

@@ -1,162 +1,214 @@
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate, NavLink } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from './context/AuthContext';
 import SignUp from './page/SignUp';
 import SignIn from './page/SignIn';
-
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { IoMenu } from "react-icons/io5";
 import { ProtectRouteAdmin } from './protectedRoutes/ProtectRoutAdmin';
 import { ProtectRouteUser } from './protectedRoutes/ProtectRoutUser';
-import TapBot from './page/TapBot';
+import Search from 'antd/es/transfer/search';
+import Home from './page/Home';
+import Blog from './page/Blog';
+import Bekzod from './page/Bekzod';
+import Dashboard from './page/Dashboard';
+import BossAnaliz from './page/BossAnaliz';
+import '../src/index.css'
+import {
+  Collapse,
+  Dropdown,
+  initTWE,
+} from "tw-elements";
+import Workers from './page/Workers';
+import Jadval from './page/Jadval';
+import DashboardTwo from './page/Dashboard 2';
 
 function App() {
   let user = localStorage.getItem('users');
   const [navbarOpen, setNavbarOpen] = useState(false);
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
+  useEffect(() => {
+    initTWE({ Collapse, Dropdown });
+  }, []);
 
   const handleSignOut = () => {
     localStorage.removeItem('users');
     navigate('/signin');
   };
 
-  const toggleNavbar = () => {
-    setNavbarOpen(!navbarOpen);
-  };
 
-  const menuToggle = () => {
-    const menu = document.getElementById("menu");
-    const liElements = document.querySelectorAll("#ulMenu li");
-
-    menu.classList.toggle("h-[200px]");
-    liElements.forEach((li) => {
-      if (li.style.display === "none") {
-        li.style.display = "block";
-      } else {
-        li.style.display = "none";
-      }
-    });
-  };
-
-  const menuResize = () => {
-    const window_size = window.innerWidth || document.body.clientWidth;
-    const menu = document.getElementById("menu");
-    const liElements = document.querySelectorAll("#ulMenu li");
-
-    if (window_size > 1000) {
-      menu.classList.remove("h-32");
-      liElements.forEach((li) => {
-        li.style.display = "none";
-      });
-    } else {
-      liElements.forEach((li) => {
-        li.style.display = "none";
-      });
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", menuResize);
-    menuResize();
-    return () => {
-      window.removeEventListener("resize", menuResize);
-    };
-  }, []);
 
   return (
     <>
-      <nav id="nav" className="bg-blue-700 shadow" role="navigation">
-        <div className="container mx-auto p-4 flex flex-wrap items-center md:flex-no-wrap">
-          <div className="mr-4 md:mr-8">
-            <a href="#" rel="home">
-              <span className="text-xl text-white">NavBar</span>
-            </a>
-          </div>
-          <div className="ml-auto md:hidden">
-            <button onClick={menuToggle} className="flex items-center px-3 py-2 border rounded" type="button">
-              <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <title>Menu</title>
-                <path fill="currentColor" d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-              </svg>
+      <div className="fixed h-[81px] w-full top-0 z-[100] backdrop-blur-md">
+        <nav
+          className=" relative top-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 backdrop-blur-[500px] flex-no-wrap items-center py-2 shadow-dark-mild  lg:flex-wrap lg:justify-start lg:py-4 rounded-[50px] bg-[#cccaca] flex w-[90%]">
+          <div className="flex w-full flex-wrap items-center justify-between px-3 border border-[red]">
+            <button
+              className="block border-0 bg-transparent px-2 text-black/50 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
+              type="button"
+              data-twe-collapse-init
+              data-twe-target="#navbarSupportedContent12"
+              aria-controls="navbarSupportedContent12"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span
+                className="[&>svg]:w-7 [&>svg]:stroke-black/50 dark:[&>svg]:stroke-neutral-200">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor">
+                  <path
+                    fillRule="evenodd"
+                    d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
+                    clipRule="evenodd" />
+                </svg>
+              </span>
             </button>
-          </div>
-          <div id="menu" className="w-full h-0 transition-all ease-out duration-500 md:transition-none md:w-auto md:flex-grow md:flex md:items-center">
-            <ul id="ulMenu" className="grid grid-cols-4 mt-[20px] md:flex md:flex-row md:gap-4 md:ml-0 md:pt-0 md:border-0">
-              <li className="col-span-2 md:col-auto">
-                <Link className="md:p-2 lg:px-4 font-semibold block text-white px-4 py-1" to="/home">Home</Link>
-              </li>
-              <li className="col-span-2 md:col-auto">
-                <Link className="md:p-2 lg:px-4 font-semibold block text-white px-4 py-1" to="/blog">Blog</Link>
-              </li>
-              <li className="col-span-2 md:col-auto">
-                <Link className="md:p-2 lg:px-4 font-semibold block text-white px-4 py-1" to="/signin">Sign IN</Link>
-              </li>
-              <li className="col-span-2 md:col-auto">
-                <Link className="md:p-2 lg:px-4 font-semibold block text-white px-4 py-1" to="/dashboard">Dashboard</Link>
-              </li>
-              <li className="col-span-2 md:col-auto">
-                <Link className="md:p-2 lg:px-4 font-semibold block text-white px-4 py-1" to="/bekzod">Bekzod</Link>
-              </li>
-              <li className="col-span-2 md:col-auto">
-                <Link className="md:p-2 lg:px-4 font-semibold block text-white px-4 py-1" to="/userpage">User Page</Link>
-              </li>
-              {user && (
-                <li className="col-span-2 md:col-auto" onClick={handleSignOut}>
-                  <Link className="md:p-2 lg:px-4 font-semibold block text-white px-4 py-1">Sign Out</Link>
+
+            <div
+              className="!visible hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto"
+              id="navbarSupportedContent12"
+              data-twe-collapse-item>
+              <a
+                className="mb-4 me-5 ms-2 mt-3 flex items-center lg:mb-0 lg:mt-0"
+                href="#">
+                <h1 className='grey-qo-regular'>Zilola Media</h1>
+              </a>
+              <ul
+                className="list-style-none me-auto flex flex-col ps-0 lg:flex-row"
+                data-twe-navbar-nav-ref>
+                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                  <NavLink
+                    to="/home"
+                    className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+                    href="#"
+                    data-twe-nav-link-ref
+                  >Home</NavLink>
                 </li>
-              )}
-            </ul>
+                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                  <NavLink
+                    to="/blog"
+                    className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+                    href="#"
+                    data-twe-nav-link-ref
+                  >Blog</NavLink>
+                </li>
+                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                  <NavLink
+                    to="/signin"
+                    className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+                    href="#"
+                    data-twe-nav-link-ref
+                  >Sign In</NavLink>
+                </li>
+                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                  <NavLink
+                    to="/dashboard"
+                    className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+                    href="#"
+                    data-twe-nav-link-ref
+                  >Dashboard</NavLink>
+                </li>
+                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                  <NavLink
+                    to="/bekzod"
+                    className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+                    href="#"
+                    data-twe-nav-link-ref
+                  >Bekzod</NavLink>
+                </li>
+                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                  <NavLink
+                    to="/workers"
+                    className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+                    href="#"
+                    data-twe-nav-link-ref
+                  >Workers</NavLink>
+                </li>
+                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                  <Link
+                    to='/signin'
+                    onClick={handleSignOut}
+                    className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+                    href="#"
+                    data-twe-nav-link-ref
+                  >Sign Out</Link>
+                </li>
+              </ul>
+            </div>
+
+            <div className="relative flex items-center">
+
+
+              <div
+                className="relative"
+                data-twe-dropdown-ref
+                data-twe-dropdown-alignment="end">
+                <a
+                  className="me-4 flex items-center text-secondary-500 transition duration-200 hover:text-secondary-600/70 hover:ease-in-out focus:text-secondary-600/70 active:text-secondary-600/70 motion-reduce:transition-none dark:text-secondary-500 dark:hover:text-secondary-500/80 dark:focus:text-secondary-500/80 dark:active:text-secondary-500/80"
+                  href="#"
+                  id="dropdownMenuButton1"
+                  role="button"
+                  data-twe-dropdown-toggle-ref
+                  aria-expanded="false">
+                  <span className="[&>svg]:w-6 ">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor">
+                      <path
+                        d="M12 12c2.485 0 4.5-2.015 4.5-4.5S14.485 3 12 3 7.5 5.015 7.5 7.5 9.515 12 12 12z" />
+                      <path
+                        fillRule="evenodd"
+                        d="M4.5 19.5a7.5 7.5 0 0115 0v.75a.75.75 0 01-.75.75h-13.5a.75.75 0 01-.75-.75v-.75z"
+                        clipRule="evenodd" />
+                    </svg>
+                  </span>
+                  <span
+                    className="absolute -mt-4 ms-2.5 rounded-full bg-danger px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-white"
+                  ></span>
+                </a>
+                <ul
+                  className="absolute z-[1000] float-left m-0 mt-1 hidden min-w-max list-none rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-surface-dark [&[data-twe-dropdown-show]]:block"
+                  aria-labelledby="dropdownMenuButton1"
+                  data-twe-dropdown-menu-ref>
+                  <li>
+                    <a
+                      className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-white/30"
+                      href="#">Dashboard</a>
+                  </li>
+                  <li>
+                    <a
+                      className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-white/30"
+                      href="#">Another action</a>
+                  </li>
+                  <li>
+                    <a
+                      className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-white/30"
+                      href="#">Something else here</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-        </div>
-      </nav>
-
-      <div className='w-full border'>
-        <nav className='flex w-[80%] m-auto justify-evenly gap-2 h-[50px] items-center'>
-          <button className='border w-[10%] h-[85%] flex items-center justify-center text-black text-bold bg-blue text-[30px]' onClick={toggleNavbar}>
-            <IoMenu />
-          </button>
-        </nav>
-      </div>
-
-      <div className={`nav w-[31%] backdrop-blur-[100px] h-[100%] fixed top-[0px] border   ${navbarOpen ? 'right-[1]' : 'fixed right-[200%]'}`}>
-        <nav>
-          <button className='text-[35px] absolute top-0 left-[80%]' onClick={toggleNavbar}><IoIosCloseCircleOutline /></button>
-          <ul className=' w-[80%] m-auto gap-2 h-[50px] grid items-center justify-center'>
-            <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
-              <NavLink to="/home">Home</NavLink>
-            </li>
-            <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
-              <NavLink to="/blog">Blog</NavLink>
-            </li>
-            {!user && <>
-              <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
-                <NavLink to="/signin">Sign In</NavLink>
-              </li>
-            </>}
-            <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
-              <NavLink to="/dashboard">Dashboard</NavLink>
-            </li>
-            <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
-              <NavLink to="/bekzod">Bekzod</NavLink>
-            </li>
-            <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
-              <NavLink to="/userpage">User Page</NavLink>
-            </li>
-            {user && <li className='text-[700] rounded-[20px] border w-[150%] bg-red-400 border-black mt-[85px] h-[50px] flex items-center justify-center text-black bg-blue '>
-              <NavLink to="/signin" onClick={handleSignOut}>Sign Out</NavLink>
-            </li>}
-          </ul>
         </nav>
       </div>
 
       <Routes>
-        <Route path="/tapbot" element={<TapBot />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/workers" element={<Workers />} />
+        <Route path="/jadval" element={<Jadval />} />
+        <Route path="/home" element={<Home />} />
+
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/bossanaliz" element={<BossAnaliz />} />
+        <Route path='/dashboardtwo' element={<DashboardTwo />} />
+        <Route path="/bekzod" element={<Bekzod />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/userpage" element={<ProtectRouteAdmin><TapBot /></ProtectRouteAdmin>} />
+        <Route path="/dashboard" element={<ProtectRouteAdmin><Dashboard /></ProtectRouteAdmin>} />
         <Route path="/search" element={<Search />} />
-        <Route path="/tapbot" element={<ProtectRouteUser><TapBot /></ProtectRouteUser>} />
+        {/* <Route path="/home" element={<ProtectRouteUser><Home /></ProtectRouteUser>} /> */}
       </Routes>
     </>
   );
