@@ -13,8 +13,10 @@ const firebaseConfig3 = {
     measurementId: "G-M23RBHJYYG"
 };
 
+// Firebase ilovasini ishga tushirish yoki olish
 const app3 = getApps().find(app => app.name === 'app3') || initializeApp(firebaseConfig3, 'app3');
 
+// Firestore, Authentication va Storage ni olish
 export const db3 = getFirestore(app3);
 export const auth3 = getAuth(app3);
 export const storage3 = getStorage(app3);

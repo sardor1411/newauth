@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { collection, onSnapshot, query, where, getDocs } from "firebase/firestore";
 import { db1 } from "../firebase/firebase.jsx";
 import { BsSearch } from "react-icons/bs";
+import { IoClose } from "react-icons/io5";
 
 // SearchByDate component
 const SearchByDate = ({ setSearchResults }) => {
@@ -35,24 +36,25 @@ const SearchByDate = ({ setSearchResults }) => {
     };
 
     return (
-        <div className="border border-black w-[90%] m-auto h-[50px]">
-            <form className="flex justify-between h-[48px]" onSubmit={handleSearch}>
+        <div className="w-[90%] m-auto h-[50px] mt-[100px]">
+            <form className="flex justify-between h-[48px] gap-2" onSubmit={handleSearch}>
                 <input
                     type="date"
-                    className="w-[100%]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     id="searchDate"
                     name="searchDate"
                     value={searchDate}
                     onChange={(e) => setSearchDate(e.target.value)}
                 />
-                <button type="submit" className="border border-black w-[3%] h-[100%] flex justify-center items-center text-[25px]">
+                <button type="submit" className="w-[50px] h-[100%] flex justify-center items-center bg-blue-500 hover:bg-blue-700 text-white rounded-md transition duration-300">
                     <BsSearch />
                 </button>
-                <button type="button" onClick={handleClearResults} className="ml-2 border border-black h-[100%] flex justify-center items-center text-[15px]">
-                    Clear Results
+                <button type="button" onClick={handleClearResults} className="w-[50px] h-[100%] flex justify-center items-center bg-red-500 hover:bg-red-700 text-white rounded-md transition duration-300">
+                    <IoClose />
                 </button>
             </form>
         </div>
+
     );
 };
 
@@ -135,15 +137,15 @@ const Home = () => {
                     ))
                 ) : (
                     box.map((mall) => (
-                        <div className="flex justify-center items-center border h-[400px] " key={mall.id}>
+                        <div className="flex justify-center items-center  h-[400px] " key={mall.id}>
                             <div className="bg-white rounded-xl shadow-lg overflow-hidden w-80 text-center transition-transform transform hover:-translate-y-1">
                                 <img src={mall.img} alt="Image" className="w-full h-44 object-cover" />
                                 <div className="p-5">
                                     <p className="text-gray-500 text-sm">{mall.firstData}</p>
                                     <h2 className="my-2 text-2xl font-bold text-gray-800">{mall.title}</h2>
                                     <div className="text-left">
-      
-                        
+
+
                                     </div>
                                     <p className="text-gray-700 text-sm">Montaj bajarilganmi : <span className="text-green-500 font-bold">{mall.montaj}</span></p>
                                 </div>

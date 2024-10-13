@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { collection, onSnapshot, query, where, getDocs } from "firebase/firestore";
-import { db1, storage1 } from "../firebase/firebase.jsx"; // Ensure correct import
+import { db1, storage1 } from "../firebase/firebase";
 
-// Use `db1` and `storage1` as needed in your component
 
 
 import { BsSearch } from "react-icons/bs";

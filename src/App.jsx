@@ -1,26 +1,25 @@
 import { Routes, Route, Link, useNavigate, NavLink } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from './context/AuthContext';
-import SignUp from './page/SignUp';
-import SignIn from './page/SignIn';
+import SignUp from './page/SignIn-Up/SignUp';
+import SignIn from './page/SignIn-Up/SignIn';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { ProtectRouteAdmin } from './protectedRoutes/ProtectRoutAdmin';
 import { ProtectRouteUser } from './protectedRoutes/ProtectRoutUser';
 import Search from 'antd/es/transfer/search';
-import Home from './page/Home';
-import Blog from './page/Blog';
-import Bekzod from './page/Bekzod';
-import Dashboard from './page/Dashboard';
-import BossAnaliz from './page/BossAnaliz';
+import Home from './page/MenuPages/Home';
+import Blog from './page/MenuPages/Blog';
+import Bekzod from './page/MenuPages/Bekzod';
+import Dashboard from './page/Dashboard/Dashboard';
+import BossAnaliz from './page/Dashboard/BossAnaliz';
+import Workers from './page/MenuPages/Workers';
+import Jadval from './page/MenuPages/Jadval';
 import '../src/index.css'
 import {
   Collapse,
   Dropdown,
   initTWE,
 } from "tw-elements";
-import Workers from './page/Workers';
-import Jadval from './page/Jadval';
-import DashboardTwo from './page/Dashboard 2';
 
 function App() {
   let user = localStorage.getItem('users');
@@ -40,10 +39,10 @@ function App() {
 
   return (
     <>
-      <div className="fixed h-[81px] w-full top-0 z-[100] backdrop-blur-md">
+      <div className="fixed w-full top-0 z-[100] h-[90px] backdrop-blur-[50px]">
         <nav
-          className=" relative top-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 backdrop-blur-[500px] flex-no-wrap items-center py-2 shadow-dark-mild  lg:flex-wrap lg:justify-start lg:py-4 rounded-[50px] bg-[#cccaca] flex w-[90%]">
-          <div className="flex w-full flex-wrap items-center justify-between px-3 border border-[red]">
+          className=" relative top-2 left-1/2 transform -translate-x-1/2  flex-no-wrap items-center py-2 shadow-dark-mild  lg:flex-wrap lg:justify-start lg:py-4 rounded-[50px] bg-[#cccaca] flex w-[90%]">
+          <div className="flex w-full flex-wrap items-center justify-between px-3">
             <button
               className="block border-0 bg-transparent px-2 text-black/50 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
               type="button"
@@ -76,9 +75,9 @@ function App() {
                 <h1 className='grey-qo-regular'>Zilola Media</h1>
               </a>
               <ul
-                className="list-style-none me-auto flex flex-col ps-0 lg:flex-row"
+                className="list-style-none me-auto flex flex-col ps-0 lg:flex-row "
                 data-twe-navbar-nav-ref>
-                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                <li className="mb-4 lg:mb-0 lg:pe-2 flex justify-center" data-twe-nav-item-ref>
                   <NavLink
                     to="/home"
                     className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
@@ -86,7 +85,7 @@ function App() {
                     data-twe-nav-link-ref
                   >Home</NavLink>
                 </li>
-                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                <li className="mb-4 lg:mb-0 lg:pe-2 flex justify-center" data-twe-nav-item-ref>
                   <NavLink
                     to="/blog"
                     className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
@@ -94,7 +93,7 @@ function App() {
                     data-twe-nav-link-ref
                   >Blog</NavLink>
                 </li>
-                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                <li className="mb-4 lg:mb-0 lg:pe-2 flex justify-center" data-twe-nav-item-ref>
                   <NavLink
                     to="/signin"
                     className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
@@ -102,7 +101,7 @@ function App() {
                     data-twe-nav-link-ref
                   >Sign In</NavLink>
                 </li>
-                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                <li className="mb-4 lg:mb-0 lg:pe-2 flex justify-center" data-twe-nav-item-ref>
                   <NavLink
                     to="/dashboard"
                     className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
@@ -110,7 +109,7 @@ function App() {
                     data-twe-nav-link-ref
                   >Dashboard</NavLink>
                 </li>
-                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                <li className="mb-4 lg:mb-0 lg:pe-2 flex justify-center" data-twe-nav-item-ref>
                   <NavLink
                     to="/bekzod"
                     className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
@@ -118,7 +117,7 @@ function App() {
                     data-twe-nav-link-ref
                   >Bekzod</NavLink>
                 </li>
-                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                <li className="mb-4 lg:mb-0 lg:pe-2 flex justify-center " data-twe-nav-item-ref>
                   <NavLink
                     to="/workers"
                     className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
@@ -126,7 +125,7 @@ function App() {
                     data-twe-nav-link-ref
                   >Workers</NavLink>
                 </li>
-                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                <li className="mb-4 lg:mb-0 lg:pe-2 flex justify-center" data-twe-nav-item-ref>
                   <Link
                     to='/signin'
                     onClick={handleSignOut}
@@ -146,7 +145,7 @@ function App() {
                 data-twe-dropdown-ref
                 data-twe-dropdown-alignment="end">
                 <a
-                  className="me-4 flex items-center text-secondary-500 transition duration-200 hover:text-secondary-600/70 hover:ease-in-out focus:text-secondary-600/70 active:text-secondary-600/70 motion-reduce:transition-none dark:text-secondary-500 dark:hover:text-secondary-500/80 dark:focus:text-secondary-500/80 dark:active:text-secondary-500/80"
+                  className="me-4 flex text-secondary-500 transition duration-200 hover:text-secondary-600/70 hover:ease-in-out focus:text-secondary-600/70 active:text-secondary-600/70 motion-reduce:transition-none dark:text-secondary-500 dark:hover:text-secondary-500/80 dark:focus:text-secondary-500/80 dark:active:text-secondary-500/80"
                   href="#"
                   id="dropdownMenuButton1"
                   role="button"
@@ -175,18 +174,13 @@ function App() {
                   data-twe-dropdown-menu-ref>
                   <li>
                     <a
-                      className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-white/30"
+                      className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 dark:text-neutral-200 hover:bg-gray-100 hover:rounded-lg"
                       href="#">Dashboard</a>
                   </li>
                   <li>
                     <a
-                      className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-white/30"
-                      href="#">Another action</a>
-                  </li>
-                  <li>
-                    <a
-                      className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-white/30"
-                      href="#">Something else here</a>
+                      className="block w-full whitespace-nowrap bg-transparent py-2 px-4 text-sm font-normal text-neutral-700 dark:text-neutral-200 hover:bg-gray-100 hover:rounded-lg"
+                      href="#">Settings</a>
                   </li>
                 </ul>
               </div>
@@ -200,15 +194,13 @@ function App() {
         <Route path="/workers" element={<Workers />} />
         <Route path="/jadval" element={<Jadval />} />
         <Route path="/home" element={<Home />} />
-
         <Route path="/blog" element={<Blog />} />
         <Route path="/bossanaliz" element={<BossAnaliz />} />
-        <Route path='/dashboardtwo' element={<DashboardTwo />} />
+        {/* <Route path='/dashboardtwo' element={<DashboardTwo />} /> */}
         <Route path="/bekzod" element={<Bekzod />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/dashboard" element={<ProtectRouteAdmin><Dashboard /></ProtectRouteAdmin>} />
         <Route path="/search" element={<Search />} />
-        {/* <Route path="/home" element={<ProtectRouteUser><Home /></ProtectRouteUser>} /> */}
       </Routes>
     </>
   );

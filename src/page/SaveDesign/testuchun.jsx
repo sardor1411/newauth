@@ -1145,7 +1145,7 @@ document.onkeydown = (e) => {
 /////////////////////////////////////////////
 import { useState, useEffect } from "react";
 import { collection, onSnapshot, query, where, getDocs } from "firebase/firestore";
-import { db1 } from "../firebase/firebase.jsx";
+import { db1 } from "../../firebase/firebase.jsx";
 import { BsSearch } from "react-icons/bs";
 
 // SearchByDate component

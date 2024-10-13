@@ -3,12 +3,12 @@ import SplitPane, { Pane } from 'split-pane-react';
 import 'split-pane-react/esm/themes/default.css';
 import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 import createimg from '../images/imagecreate.png';
-import { storage2, jb } from '../firebase/firebaseworkers.jsx';
+import { db3, auth3, storage3 } from '../firebase/firebasesecond';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { notification, Dropdown, Menu } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import Jadval from './Jadval';  // Jadval komponentini chaqiramiz
+import Jadval from './Jadval.jsx';
 
 function Workers() {
   const [sizes, setSizes] = useState([100, '30%', 'auto']);
@@ -51,7 +51,7 @@ function Workers() {
       await uploadBytes(storageRef, imageFile);
       const downloadURL = await getDownloadURL(storageRef);
 
-      const docRef = await addDoc(collection(jb, 'workers'), {
+      const docRef = await addDoc(collection(db3, 'workers'), {
         name: name,
         img: downloadURL,
         attendance: [],  // Initialize with an empty attendance array
@@ -82,7 +82,7 @@ function Workers() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(jb, 'workers'));
+      const querySnapshot = await getDocs(collection(db3, 'workers'));
       const workersData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setWorkers(workersData);
     };
@@ -92,7 +92,7 @@ function Workers() {
 
   const handleDelete = async (id) => {
     try {
-      const deletePost = doc(jb, 'workers', id);
+      const deletePost = doc(db3, 'workers', id);
       await deleteDoc(deletePost);
 
       const updatedWorkers = workers.filter(worker => worker.id !== id);
@@ -124,7 +124,7 @@ function Workers() {
 
   const handleScheduleSave = async (workerId, schedule) => {
     try {
-      const docRef = doc(jb, 'workers', workerId);
+      const docRef = doc(db3, 'workers', workerId);
       await updateDoc(docRef, { schedule });
 
       setWorkers(prevWorkers =>
