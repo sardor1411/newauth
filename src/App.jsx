@@ -14,6 +14,7 @@ import Dashboard from './page/Dashboard/Dashboard';
 import BossAnaliz from './page/Dashboard/BossAnaliz';
 import Workers from './page/MenuPages/Workers';
 import Jadval from './page/MenuPages/Jadval';
+import CreateData from './page/Data create_edit/CreateData';
 import '../src/index.css'
 import {
   Collapse,
@@ -41,7 +42,7 @@ function App() {
     <>
       <div className="fixed w-full top-0 z-[100] h-[90px] backdrop-blur-[50px]">
         <nav
-          className=" relative top-2 left-1/2 transform -translate-x-1/2  flex-no-wrap items-center py-2 shadow-dark-mild  lg:flex-wrap lg:justify-start lg:py-4 rounded-[50px] bg-[#cccaca] flex w-[90%]">
+          className=" relative top-2 left-1/2 transform -translate-x-1/2  flex-no-wrap items-center py-2 shadow-dark-mild  lg:flex-wrap lg:justify-start lg:py-4 rounded-[20px] bg-[#cccaca] flex w-[90%]">
           <div className="flex w-full flex-wrap items-center justify-between px-3">
             <button
               className="block border-0 bg-transparent px-2 text-black/50 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
@@ -195,6 +196,7 @@ function App() {
         <Route path="/jadval" element={<Jadval />} />
         <Route path="/home" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/createdata" element={<CreateData />} />
         <Route path="/bossanaliz" element={<BossAnaliz />} />
         {/* <Route path='/dashboardtwo' element={<DashboardTwo />} /> */}
         <Route path="/bekzod" element={<Bekzod />} />

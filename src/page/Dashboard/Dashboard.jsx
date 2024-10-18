@@ -9,6 +9,7 @@ import { v4 as uuid } from "uuid";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { addDoc, deleteDoc, updateDoc, doc } from "firebase/firestore";
 import { IoClose } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -116,7 +117,7 @@ const Dashboard = () => {
   const handleCreate = async (e) => {
     e.preventDefault();
     setShowForm(false)
-    if (title === "" || des === "" || img === null || montaj === "" || firstData === "") {
+    if (title === "" || img === null || montaj === "" || firstData === "") {
       return notification.error({
         message: "Input bo'sh",
         description: "Malumot to'liq kiritilmagan"
@@ -234,7 +235,6 @@ const Dashboard = () => {
 
     await updateDoc(updateData, {
       title,
-      descript: des,
       img: imgUrl,
       montaj,
       firstData,
@@ -394,10 +394,16 @@ const Dashboard = () => {
     }));
   };
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+      navigate('/createdata');
+  };
+
   return (
     <div className="mt-[100px]">
 
-      <button className="flex m-auto border w-[100px] h-[40px] items-center justify-center mt-[15px]" onClick={() => setShowForm(true)}>
+      <button className="flex m-auto border w-[100px] h-[40px] items-center justify-center mt-[15px]" onClick={handleClick}>
         Add Data
       </button>
       {/* Create Data */}
@@ -427,10 +433,6 @@ const Dashboard = () => {
                     className="block w-[70%] p-2 mb-4 border border-gray-300 rounded-md"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                  />
-                  <textarea
-                    placeholder="To'y xaqida ma'lumotlar"
-                    className="block w-[70%] p-2 mb-4 border border-gray-300 rounded-md"
                   />
                   <input
                     type="file"
