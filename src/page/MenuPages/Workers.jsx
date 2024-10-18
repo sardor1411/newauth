@@ -54,8 +54,8 @@ function Workers() {
       const docRef = await addDoc(collection(db3, 'workers'), {
         name: name,
         img: downloadURL,
-        attendance: [],  // Initialize with an empty attendance array
-        schedule: []     // Har bir ishchi uchun alohida jadval
+        attendance: [],
+        schedule: []
       });
 
       notification.success({
